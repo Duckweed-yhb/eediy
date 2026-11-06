@@ -25,6 +25,7 @@ export default defineConfig({
       { text: '前言', link: '/preface' },
       { text: '路线地图', link: '/roadmap' },
       { text: '路线总览', link: '/README' },
+      { text: '同校指南', link: '/campus/hitsz-ee/' },
       { text: '附录', link: '/appendix/README' },
       { text: '数理与编程基础', link: '/01-math-programming/README' }
     ],
@@ -49,6 +50,65 @@ export default defineConfig({
           { text: '06 信号与通信', link: '/06-signal-communication/README' },
           { text: '07 数字逻辑与 FPGA', link: '/07-digital-fpga/README' },
           { text: '08 硬件工具链', link: '/08-hardware-toolchain/README' }
+        ]
+      },
+      {
+        text: '同校指南',
+        items: [
+          { text: '总览 · 哈工大（深圳）电气', link: '/campus/hitsz-ee/' },
+          {
+            text: '课内 · 按学期',
+            collapsed: true,
+            items: [
+              { text: '课内总览（学分与对照）', link: '/campus/hitsz-ee/curriculum/README' },
+              {
+                text: '大一',
+                collapsed: true,
+                items: [
+                  { text: '大一秋 · 换挡期', link: '/campus/hitsz-ee/curriculum/y1-autumn' },
+                  { text: '大一春 · 数学与物理入场', link: '/campus/hitsz-ee/curriculum/y1-spring' },
+                  { text: '大一夏 · 第一个自由窗口', link: '/campus/hitsz-ee/curriculum/y1-summer' }
+                ]
+              },
+              {
+                text: '大二',
+                collapsed: true,
+                items: [
+                  { text: '大二秋 · 电路年上半', link: '/campus/hitsz-ee/curriculum/y2-autumn' },
+                  { text: '大二春 · 电路年下半', link: '/campus/hitsz-ee/curriculum/y2-spring' },
+                  { text: '大二夏 · 竞赛启动窗口', link: '/campus/hitsz-ee/curriculum/y2-summer' }
+                ]
+              },
+              {
+                text: '大三',
+                collapsed: true,
+                items: [
+                  { text: '大三秋 · 分水岭上半', link: '/campus/hitsz-ee/curriculum/y3-autumn' },
+                  { text: '大三春 · 电力电子与课设', link: '/campus/hitsz-ee/curriculum/y3-spring' },
+                  { text: '大三夏 · 升学就业决策', link: '/campus/hitsz-ee/curriculum/y3-summer' }
+                ]
+              },
+              {
+                text: '大四',
+                collapsed: true,
+                items: [
+                  { text: '大四秋 · 收口与秋招', link: '/campus/hitsz-ee/curriculum/y4-autumn' },
+                  { text: '大四春 · 毕设', link: '/campus/hitsz-ee/curriculum/y4-spring' },
+                  { text: '大四夏 · 毕业与交接', link: '/campus/hitsz-ee/curriculum/y4-summer' }
+                ]
+              }
+            ]
+          },
+          {
+            text: '课外 · 三条线',
+            collapsed: true,
+            items: [
+              { text: '课外总览（三条线的关系）', link: '/campus/hitsz-ee/beyond/README' },
+              { text: '竞赛', link: '/campus/hitsz-ee/beyond/competition' },
+              { text: '项目', link: '/campus/hitsz-ee/beyond/project' },
+              { text: '实习', link: '/campus/hitsz-ee/beyond/internship' }
+            ]
+          }
         ]
       },
       {

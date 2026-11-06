@@ -32,7 +32,12 @@ eediy_wiki/
 │   ├── 05-power-system/          电力系统
 │   ├── 06-signal-communication/  信号与通信
 │   ├── 07-digital-fpga/          数字逻辑与 FPGA
-│   └── 08-hardware-toolchain/     硬件工具链
+│   ├── 08-hardware-toolchain/     硬件工具链
+│   └── campus/                    同校指南（哈工大（深圳）电气工程及其自动化）
+│       └── hitsz-ee/
+│           ├── index.md           总览：课内 / 课外两条主线与学期导航
+│           ├── curriculum/        课内：总览 + 12 个学期页（秋 / 春 / 夏 × 四学年）
+│           └── beyond/            课外：总览 + 竞赛 / 项目 / 实习
 ├── .github/workflows/deploy.yml   GitHub Actions 自动构建并部署到 Pages
 ├── package.json                   VitePress 依赖与脚本
 └── LICENSE                        MIT License
@@ -54,6 +59,7 @@ eediy_wiki/
 | 06 信号与通信 | [docs/06-signal-communication/](docs/06-signal-communication/README.md) | 信号与系统、通信原理、DSP |
 | 07 数字逻辑与 FPGA | [docs/07-digital-fpga/](docs/07-digital-fpga/README.md) | 数字逻辑、状态机、Verilog |
 | 08 硬件工具链 | [docs/08-hardware-toolchain/](docs/08-hardware-toolchain/README.md) | PCB、仿真、测量、版本管理 |
+| 同校指南 | [docs/campus/hitsz-ee/](docs/campus/hitsz-ee/index.md) | 哈工大（深圳）电气工程及其自动化：课内 12 学期 + 课外竞赛 / 项目 / 实习 |
 
 ## 本地预览
 

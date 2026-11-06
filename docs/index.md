@@ -42,4 +42,7 @@ features:
   - title: 08 硬件工具链
     details: PCB 设计、仿真、测量调试、版本管理与文档工具。
     link: /08-hardware-toolchain/README
+  - title: 同校指南 · 哈工大（深圳）电气
+    details: 课内按 12 个学期、课外分竞赛 / 项目 / 实习，面向本校电气工程及其自动化专业。
+    link: /campus/hitsz-ee/
 ---
