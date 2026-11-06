@@ -128,6 +128,214 @@
 }
 
 /* ---------------------------------------------------------------------
+   同校指南 · 定位卡（campus/hitsz-ee.md）
+   左：专业一句话画像；右：关键参数列表
+   --------------------------------------------------------------------- */
+.campus-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  gap: 1.1rem 1.6rem;
+  margin: 1.5rem 0;
+  padding: 1.15rem 1.3rem;
+  border: 1px solid var(--vp-c-divider);
+  border-left: 4px solid var(--vp-c-brand-2);
+  border-radius: 12px;
+  background: var(--vp-c-bg-soft);
+}
+
+.campus-hero__tag {
+  display: inline-block;
+  margin-bottom: 0.45rem;
+  padding: 0.1rem 0.55rem;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+}
+
+.campus-hero__main h3 {
+  margin: 0.15rem 0 0.55rem;
+  font-size: 1.12rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.campus-hero__main p {
+  margin: 0;
+  font-size: 0.88rem;
+  line-height: 1.75;
+  color: var(--vp-c-text-2);
+}
+
+.campus-meta {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+  margin: 0;
+  padding-left: 1.1rem;
+  border-left: 1px dashed var(--vp-c-divider);
+}
+
+.campus-meta > div {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 0.5rem;
+  align-items: baseline;
+}
+
+.campus-meta dt {
+  font-size: 0.76rem;
+  color: var(--vp-c-text-3);
+}
+
+.campus-meta dd {
+  margin: 0;
+  font-size: 0.86rem;
+  color: var(--vp-c-text-1);
+  line-height: 1.5;
+}
+
+/* ---------------------------------------------------------------------
+   同校指南 · 项目阶梯（campus/hitsz-ee/beyond/project.md）
+   三级依次右移，形成台阶感；每级左侧品牌色竖条标出对应板块
+   --------------------------------------------------------------------- */
+.campus-ladder {
+  display: grid;
+  gap: 0.55rem;
+  margin: 1.3rem 0 1.6rem;
+}
+
+.campus-ladder__row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 0.75rem;
+  align-items: start;
+  padding: 0.7rem 0.95rem;
+  border: 1px solid var(--vp-c-divider);
+  border-left: 3px solid var(--vp-c-brand-2);
+  border-radius: 10px;
+  background: var(--vp-c-bg-soft);
+}
+
+/* 台阶：第 2、3 级逐级右移 */
+.campus-ladder__row--2 {
+  margin-left: 1.15rem;
+}
+
+.campus-ladder__row--3 {
+  margin-left: 2.3rem;
+}
+
+.campus-ladder__no {
+  padding-top: 0.15rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--vp-c-brand-1);
+}
+
+.campus-ladder__title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+}
+
+.campus-ladder__meta {
+  margin-top: 0.2rem;
+  font-size: 0.8rem;
+  line-height: 1.65;
+  color: var(--vp-c-text-2);
+}
+
+/* ---------------------------------------------------------------------
+   同校指南 · 导航网格（campus/hitsz-ee/index.md）
+   把学期表 / 课外表里的链接做成可点的小卡片，避免退化成纯表格
+   --------------------------------------------------------------------- */
+.campus-grid {
+  margin: 1.4rem 0;
+}
+
+.campus-grid table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  border-collapse: separate;
+  border-spacing: 0.35rem 0.35rem;
+  margin: 0;
+}
+
+.campus-grid table th {
+  border: none;
+  background: transparent;
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--vp-c-text-3);
+  padding: 0.25rem 0.5rem;
+}
+
+.campus-grid table td {
+  border: none;
+  padding: 0.3rem 0.5rem;
+  vertical-align: middle;
+  background: transparent;
+}
+
+.campus-grid table tr:first-child th {
+  border-bottom: 1px dashed var(--vp-c-divider);
+}
+
+/* 第一列（学年）作为行标签 */
+.campus-grid table td:first-child {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--vp-c-text-1);
+  white-space: nowrap;
+}
+
+/* 链接渲染成卡片 */
+.campus-grid table td a {
+  display: block;
+  padding: 0.4rem 0.55rem;
+  border: 1px solid var(--vp-c-divider);
+  border-left: 3px solid var(--vp-c-brand-2);
+  border-radius: 8px;
+  background: var(--vp-c-bg-soft);
+  font-size: 0.79rem;
+  line-height: 1.45;
+  text-decoration: none;
+  color: var(--vp-c-text-1);
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.campus-grid table td a:hover {
+  border-color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+}
+
+/* 窄屏：定位卡改为上下堆叠 */
+@media (max-width: 720px) {
+  .campus-hero {
+    grid-template-columns: 1fr;
+  }
+  .campus-meta {
+    padding-left: 0;
+    padding-top: 0.85rem;
+    border-left: none;
+    border-top: 1px dashed var(--vp-c-divider);
+  }
+  .campus-ladder__row--2,
+  .campus-ladder__row--3 {
+    margin-left: 0;
+  }
+  .campus-grid table {
+    display: block;
+  }
+}
+
+/* ---------------------------------------------------------------------
    课程依赖地图 · 图例（roadmap.md 1.2 课程级详图）
    --------------------------------------------------------------------- */
 .roadmap-legend {
