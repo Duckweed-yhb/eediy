@@ -7,3 +7,7 @@ docs/.vitepress/dist/
 .DS_Store
 Thumbs.db
 *.log
+*.err
+
+# 本地预览截图（过程文件，不入库）
+.shots/
