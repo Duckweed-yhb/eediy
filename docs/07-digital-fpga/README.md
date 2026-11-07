@@ -1,4 +1,4 @@
-# 07 数字逻辑与 FPGA · Digital Logic & FPGA
+# 07 数字逻辑与 FPGA
 
 数字电路基础与可编程逻辑：组合 / 时序逻辑、状态机、Verilog / VHDL 描述、FPGA 工程流程与时序约束。
 
