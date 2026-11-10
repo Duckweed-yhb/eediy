@@ -1,9 +1,12 @@
 # 构建 VitePress 站点并部署到 GitHub Pages
-name: Deploy VitePress site to Pages
+name: Build and deploy VitePress site
 
 on:
-  # 推送到 main 分支时运行
+  # 推送到 main 分支时构建并部署
   push:
+    branches: [main]
+  # PR 只做构建检查，不部署
+  pull_request:
     branches: [main]
   # 允许在 Actions 页面手动触发
   workflow_dispatch:
@@ -32,22 +35,28 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 20
+          cache: npm
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
+      # 用 lockfile 精确安装：PR 里依赖不会漂移，构建结果可复现
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build with VitePress
         run: npm run docs:build
 
+      # 只有 main 推送和手动触发才上传发布产物；PR 只验证「能不能构建」
       - name: Upload artifact
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         uses: actions/upload-pages-artifact@v3
         with:
           path: docs/.vitepress/dist
 
   deploy:
+    # 部署条件与改动前保持一致：只在 main 推送或手动触发时执行
+    if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
