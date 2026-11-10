@@ -1,4 +1,4 @@
-# EE自学指南
+# 电气自学指南
 
 > 代号 EEDIY（EE + DIY），对标 csdiy.wiki 的「CS自学指南」。
 
