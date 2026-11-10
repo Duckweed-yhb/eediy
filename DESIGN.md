@@ -47,12 +47,17 @@
 
 | token | 值 |
 |---|---|
-| `--ee-measure` | `46rem`（正文版心，约 65–75ch） |
-| 正文 | 16.5px / line-height 1.85 / letter-spacing .01em |
-| 文档 h1 | `clamp(1.75rem, 1.35rem + 1.4vw, 2.35rem)`，700，-0.02em |
-| 首页 h1 | `clamp(2rem, 1.35rem + 3.1vw, 3.3rem)`，700，-0.035em，`max-width: 16ch` |
-| h2 | 1.42rem / 650，**上方 2.8rem、下方 0.75rem**，带 `border-top: 1px rule` |
-| 外壳 | `--vp-sidebar-width 15.5rem`、`--vp-nav-height 56px`、`--vp-layout-max-width 1520px` |
+| `--ee-measure` | `46rem`（正文版心，中文约 38–42 字） |
+| `--ee-measure-lead` | `42rem`（导语与说明块，比正文短一档） |
+| `--ee-measure-home` | `46rem`（首页与正文同版心） |
+| `--ee-scroll-offset` | `calc(导航 56px + 1rem)`（锚点跳转的顶部留白） |
+| 正文 | `1.03rem`（≈16.5px）/ line-height 1.85 / letter-spacing 0 |
+| 文档 h1 | `clamp(1.7rem, 1.3rem + 1.4vw, 2.3rem)`，700，行高 1.3 |
+| 首页 h1 | `clamp(1.95rem, 1.4rem + 2.6vw, 3rem)`，700，行高 1.28，`max-width: 20em`，`text-wrap: balance` |
+| h2 | 1.4rem / 650，行高 1.4，**上方 2.8rem、下方 0.75rem**，带 `border-top: 1px rule` |
+| h3 / h4 | 1.1rem / 0.96rem，600，行高 1.5 |
+| 外壳 | `--vp-sidebar-width 16.5rem`、`--vp-nav-height 56px`、`--vp-layout-max-width 1520px` |
+| 字号单位 | 正文用 `rem`，跟随读者浏览器字号；不引入自有字体文件 |
 
 动效
 
@@ -70,15 +75,21 @@
 6. **标题上方的空白多于下方**，靠这条把段落切开。
 7. 表格 = 数据手册 ruled 表：只有上下 1px 粗线 + 表头线 + 行线，无斑马纹，`tabular-nums`。
 8. 窄屏（≤720px）宽表转横向滚动；≤640px 双列组件降单列。
+9. **锚点要有顶部留白**：`html { scroll-padding-top }` 与标题的 `scroll-margin-top` 同时给，跳转后标题不钻到固定导航底下。
+10. **中文标题不做负字距**：h1 行高 1.3、h2 1.4、h3/h4 1.5；英文那套 1.1 的展示行高会把两三行的中文标题压成一坨。
+11. **版心只钉正文**：`.VPDoc .content-container` 定 46rem，`.VPDoc .container` 交给 VitePress（≥1280 时它等于目录 224px + 正文 736px）。把 container 一并收窄，右侧目录会反过来把正文挤到五百多像素。
+12. **表格先于正文撑不住**：≤900px 就转局部横滚，只让表格滚、不让整页溢出；不靠 `white-space: nowrap` 把整表拉宽。
 
 ## 4. 首页
 
 `docs/index.md` 用 `layout: page` + `sidebar: false` + `aside: false`。
 
-- note：`layout: page` 的内容**不会被 `.vp-doc` 包裹**，DOM 是 `.VPPage > div > div`，所有首页选择器必须绕开 `.vp-doc`。
-- Markdown 会把整行包成 `<p>`，网格里要落两列必须 `.VPPage li > p { display: contents }`。
-- 首屏就是论点（h1），不是站名，不是 slogan + CTA 按钮。
-- 索引条目：`<span class="idx-no">01</span> **标题** <span class="idx-gist">一句说明</span>`。
+- 真实 DOM：`.VPPage > div[style]`（VitePress 渲染层）`> div`（markdown 内容）。首页内容**不被 `.vp-doc` 包裹**，所以全部选择器写到 `.VPPage > div > div`，只碰内容层，不碰渲染层的 `position: relative`。
+- 版心 `46rem`，与正文同宽；索引说明限宽 36rem，避免一句说明跨到九百像素以上的长行。
+- 首屏就是论点（h1），不是站名，不是 slogan + CTA 按钮。标题 20em 宽、`text-wrap: balance`，折两行时自动均衡，不留孤字。
+- 导语与「第一次来」引导段各限宽 42rem，与索引之间留 2.4rem：层次靠留白，不套框。
+- 索引条目：`<span class="idx-no">01</span> **标题** <span class="idx-gist">一句说明</span>`；`display: contents` 让元素直接落进两列网格。
+- 末段「其余入口」用 `p:last-of-type` 定位，不按段落序号取——首页段落增减时不会错位。
 
 ## 5. 组件映射
 
@@ -92,6 +103,7 @@
 | `.roadmap-legend` | 方角 1px 框，dot 三态（实心铜 / 虚线 / 方块） |
 | `.DocSearch-Button` | 导航搜索按钮：方角、1px `--ee-rule`，hover 时边框转铜线、底色用 `--ee-copper-soft`；不用主题默认的胶囊与阴影 |
 | `.VPLocalSearchBox` | 搜索浮层：1px 外框、无阴影；选中项用铜色背景 + 1px 铜色框，不用左边色条 |
+| `.VPLocalSearchBox .excerpt .vp-doc` | 搜索摘要自带 `.vp-doc` 类名，压回 0.82rem / 1.6，否则继承正文版式 |
 
 ## 6. 明确不要
 
@@ -118,3 +130,16 @@
 - 新增两张 Mermaid 图（课程体系四层结构、方向分流五线依赖）。制图规则：**单色 + 线型区分**，不再用早期 roadmap 的六色填充——避免与「色彩只有一个来源」冲突。
 - 导航（`nav`）改为 7 项：前言 / 怎么用 / 课程体系 / 方向分流 / 路线地图 / 同校指南 / 附录。侧栏「总览」扩到 10 条，「课程页」独立成组。
 - `docs:build` exit 0（9.54s）。**本轮仍无浏览器工具**：明暗主题、≤720px 窄屏、两张新图的客户端渲染均未截图验证，只有构建产物与链接层验证。
+
+## 10. 验证记录（2026-11-11 UI 与排版）
+
+- **版心被目录挤压**：原 `.VPDoc .container` 被限到 768px，而 VitePress 的 container 是「目录 224px + 正文」的 flex 行（≥1280 时 max-width 1104px，见 `theme-default/components/VPDoc.vue`），两者相减，1280px 以上正文只剩约 544px。已删除该覆盖，只保留 `.content-container` 的 46rem。
+- **锚点遮挡**：补 `html { scroll-padding-top }` 与标题 `scroll-margin-top`，取值 `calc(56px + 1rem)`。
+- **中文排版**：去掉标题与侧栏的负字距、宽字距；h1 行高 1.18→1.3，h2 1.3→1.4，h3/h4 1.5；正文 16.5px→`1.03rem`，跟随读者浏览器字号。
+- **表格**：≤900px 转局部横滚（原先到 720 才转，且用 `white-space: nowrap` 把整表拉宽）；单元格改为可换行，长说明不再靠横滚读。
+- **Mermaid**：容器横向滚动 + 32rem 最小宽，不把整图缩到手机宽度；≤720px 收到 26rem。
+- **首页**：作用域收到 `.VPPage > div > div`，版心 64rem→46rem，标题去掉 `-0.035em` 与 1.1 行高、改 `text-wrap: balance`，末段改用 `p:last-of-type`。
+- **导航**：一级入口 7→6；侧栏按「开始阅读 / 学习路径 / 查阅」三段分组，长标题去掉括号说明。
+- **颜色**：明暗两套 token 全量实测对比度（ink 16.30/14.91、ink-2 7.86/8.26、ink-3 4.53/5.09、copper 5.88/7.67），无一对低于 4.5:1，色板未改。
+- **构建**：`docs:build` exit 0（25.89s / 15.77s），产物 CSS 130KB，`!important` 18→15。
+- **未做视觉验收**：本机无浏览器渲染与截图工具，375 / 768 / 1280 / 1440 四个宽度、明暗主题、200% 缩放、搜索浮层与 Mermaid 的实际渲染均**未截图确认**。以上结论来自构建产物与 VitePress 源码核对，属于源码验证，不是渲染验证。

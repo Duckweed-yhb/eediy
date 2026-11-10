@@ -27,8 +27,12 @@
   --ee-mono: ui-monospace, "Cascadia Code", "JetBrains Mono", Consolas,
     "SF Mono", Menlo, monospace;
 
-  /* —— 版式节奏 —— */
-  --ee-measure: 46rem;
+  /* —— 版式节奏：一套尺度，按层级取用 —— */
+  --ee-measure: 46rem; /* 正文版心，中文约 38–42 字一行 */
+  --ee-measure-lead: 42rem; /* 导语与说明块，比正文短一档 */
+  --ee-measure-home: 46rem; /* 首页与正文同版心，索引行不跨长线 */
+  --ee-scroll-offset: calc(var(--vp-nav-height, 56px) + 1rem);
+  --ee-hit: 2.25rem; /* 可点条目的最小高度 */
   --ee-step-1: 0.4rem;
   --ee-step-2: 0.75rem;
   --ee-step-3: 1.15rem;
@@ -53,7 +57,7 @@
   --vp-font-family-base: var(--ee-sans);
   --vp-font-family-mono: var(--ee-mono);
 
-  --vp-sidebar-width: 15.5rem;
+  --vp-sidebar-width: 16.5rem; /* 中文长标题在 15.5rem 内会折三行 */
   --vp-nav-height: 56px;
   --vp-layout-max-width: 1520px;
 
@@ -113,6 +117,8 @@
 
 html {
   scrollbar-color: var(--ee-rule-strong) transparent;
+  /* 锚点跳转后，标题不钻进固定导航底下 */
+  scroll-padding-top: var(--ee-scroll-offset);
 }
 
 *::-webkit-scrollbar {
@@ -140,32 +146,34 @@ html {
    外壳：导航条与侧边栏
    ===================================================================== */
 
-.VPNavBar {
-  background: var(--ee-paper) !important;
-}
-
+/* 导航条与侧栏：一条纸面，不投影。
+   VitePress 的 scoped 规则靠属性选择器提高特异性，这里用两个类名与它打平，
+   靠加载顺序取胜；只在整块背景上保留 !important。 */
+.VPNavBar,
 .VPNavBar.has-sidebar .curtain,
 .VPNavBar:not(.home) .content-body {
   background: var(--ee-paper) !important;
 }
 
 .VPNavBar .divider {
-  background: var(--ee-rule) !important;
+  background: var(--ee-rule);
 }
 
 .VPNavBarTitle .title {
   font-size: 0.92rem;
   font-weight: 600;
-  letter-spacing: 0.02em;
+  letter-spacing: 0;
 }
 
-.VPNavBarMenuLink {
-  font-size: 0.86rem !important;
-  font-weight: 500 !important;
+.VPNavBar .VPNavBarMenuLink {
+  font-size: 0.84rem;
+  font-weight: 500;
+  letter-spacing: 0;
 }
 
-.VPNavBarMenuLink.active {
-  color: var(--ee-copper) !important;
+.VPNavBar .VPNavBarMenuLink.active {
+  color: var(--ee-copper);
+  font-weight: 600;
 }
 
 .VPNavBarMenu .VPNavBarMenuLink::after {
@@ -176,19 +184,21 @@ html {
   border-right: 1px solid var(--ee-rule);
   background: var(--ee-paper) !important;
   scrollbar-width: thin;
+  padding-bottom: 2.5rem;
 }
 
+/* 分组标题：中文不加宽字距，靠字号与分隔线立住 */
 .VPSidebar .VPSidebarItem.level-0 .text {
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.02em;
   color: var(--ee-ink-3);
   padding-bottom: 0.35rem;
   border-bottom: 1px solid var(--ee-rule);
 }
 
 .VPSidebar .VPSidebarItem.level-0 + .VPSidebarItem.level-0 {
-  margin-top: 1rem;
+  margin-top: 1.4rem;
 }
 
 .VPSidebarItem.level-1 .text,
@@ -196,7 +206,14 @@ html {
 .VPSidebarItem.level-3 .text,
 .VPSidebarItem.level-4 .text {
   font-size: 0.86rem;
-  line-height: 1.5;
+  line-height: 1.45;
+}
+
+/* 侧栏条目做成够高的点击条：中文长标题折行时仍是完整目标 */
+.VPSidebarItem.level-1 > .item > .link,
+.VPSidebarItem.level-2 > .item > .link,
+.VPSidebarItem.level-3 > .item > .link {
+  padding-block: 0.3rem;
 }
 
 .VPSidebarItem.is-active .text {
@@ -230,18 +247,17 @@ html {
    ===================================================================== */
 
 .vp-doc {
-  font-size: 16.5px;
+  /* 用 rem 而非 px：读者调大浏览器默认字号时，正文跟着变大 */
+  font-size: 1.03rem;
   line-height: 1.85;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
   color: var(--ee-ink);
 }
 
+/* 版心：只钉正文宽度。容器宽度交给 VitePress —— 它的 .container 是
+   aside + content 的 flex 行，若一并收窄，右侧目录会把正文挤到五百多像素。 */
 .VPDoc .content-container {
   max-width: var(--ee-measure) !important;
-}
-
-.VPDoc .container {
-  max-width: calc(var(--ee-measure) + 2rem) !important;
 }
 
 .vp-doc p,
@@ -250,28 +266,42 @@ html {
 }
 
 .vp-doc p {
-  margin: var(--ee-step-2) 0;
+  margin: 0.85rem 0;
+  text-wrap: pretty;
 }
 
-.vp-doc > p:first-of-type {
+/* 紧跟 h1 的那一段才是导语：比正文浅一档，并收窄行宽。
+   不用 > p:first-of-type —— 课程页 h1 后面是引言块，第一个直接子段落
+   其实在正文中间，会被误当成导语。 */
+.vp-doc h1 + p {
+  max-width: var(--ee-measure-lead);
   color: var(--ee-ink-2);
 }
 
+/* 标题：中文标题需要更松的行高，不做负字距；锚点跳转不被固定导航盖住 */
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3,
+.vp-doc h4 {
+  scroll-margin-top: var(--ee-scroll-offset);
+  text-wrap: balance;
+}
+
 .vp-doc h1 {
-  font-size: clamp(1.75rem, 1.35rem + 1.4vw, 2.35rem);
+  font-size: clamp(1.7rem, 1.3rem + 1.4vw, 2.3rem);
   font-weight: 700;
-  letter-spacing: -0.02em;
-  line-height: 1.18;
+  letter-spacing: 0;
+  line-height: 1.3;
   margin: 0 0 var(--ee-step-3);
   padding-bottom: var(--ee-step-2);
   border-bottom: 1px solid var(--ee-rule-strong);
 }
 
 .vp-doc h2 {
-  font-size: 1.42rem;
+  font-size: 1.4rem;
   font-weight: 650;
-  letter-spacing: -0.01em;
-  line-height: 1.3;
+  letter-spacing: 0;
+  line-height: 1.4;
   margin: var(--ee-step-5) 0 var(--ee-step-2);
   padding-top: var(--ee-step-3);
   border-top: 1px solid var(--ee-rule);
@@ -284,13 +314,15 @@ html {
 .vp-doc h3 {
   font-size: 1.1rem;
   font-weight: 600;
+  line-height: 1.5;
   margin: var(--ee-step-4) 0 var(--ee-step-1);
   color: var(--ee-ink);
 }
 
 .vp-doc h4 {
-  font-size: 0.95rem;
+  font-size: 0.96rem;
   font-weight: 600;
+  line-height: 1.5;
   margin: var(--ee-step-3) 0 var(--ee-step-1);
   color: var(--ee-ink-2);
 }
@@ -314,15 +346,19 @@ html {
   margin: 0.35rem 0;
 }
 
-/* 列表：紧凑，与正文同一字号 */
+/* 列表：与正文同一字号；中文的项目符号离文字再远一点 */
 .vp-doc ul,
 .vp-doc ol {
-  margin: var(--ee-step-2) 0;
-  padding-left: 1.35rem;
+  margin: 0.75rem 0;
+  padding-left: 1.5rem;
 }
 
 .vp-doc li {
-  margin: 0.3rem 0;
+  margin: 0.35rem 0;
+}
+
+.vp-doc li > p {
+  margin: 0.35rem 0;
 }
 
 .vp-doc li::marker {
@@ -350,6 +386,8 @@ html {
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
   text-decoration-color: var(--ee-copper-line);
+  text-decoration-skip-ink: auto;
+  overflow-wrap: break-word;
   transition: text-decoration-thickness 0.15s ease, color 0.15s ease;
 }
 
@@ -358,11 +396,7 @@ html {
   text-decoration-color: var(--ee-copper);
 }
 
-.vp-doc a:focus-visible {
-  outline: 2px solid var(--ee-copper);
-  outline-offset: 2px;
-}
-
+/* 行内代码：长串可以断行，不把版心撑破 */
 .vp-doc code {
   font-family: var(--ee-mono);
   font-size: 0.86em;
@@ -370,21 +404,29 @@ html {
   border-radius: 2px;
   background: var(--ee-paper-sunk);
   color: var(--ee-ink);
+  overflow-wrap: break-word;
 }
 
+/* 代码块：保持原始格式，长行在块内横向滚动 */
 .vp-doc .code-block,
 .vp-doc div[class*="language-"] {
   border-radius: 2px !important;
   border: 1px solid var(--ee-rule);
   background: var(--ee-paper-raised) !important;
-  font-size: 0.86rem;
+  font-size: 0.85rem;
   line-height: 1.7;
+}
+
+.vp-doc div[class*="language-"] pre {
+  overflow-x: auto;
+  scrollbar-width: thin;
 }
 
 .vp-doc div[class*="language-"] code {
   background: transparent;
   padding: 0;
   font-size: inherit;
+  overflow-wrap: normal;
 }
 
 .vp-doc div[class*="language-"] .lang,
@@ -392,6 +434,13 @@ html {
   color: var(--ee-ink-3);
   font-family: var(--ee-mono);
   font-size: 0.72rem;
+  letter-spacing: 0.02em;
+}
+
+/* 复制按钮维持 2rem 以上的点击区域 */
+.vp-doc div[class*="language-"] button.copy {
+  min-width: 2rem;
+  min-height: 2rem;
 }
 
 /* =====================================================================
@@ -406,18 +455,21 @@ html {
   border-top: 1px solid var(--ee-rule-strong);
   border-bottom: 1px solid var(--ee-rule-strong);
   border-collapse: collapse;
+  table-layout: auto;
   font-size: 0.9rem;
-  line-height: 1.65;
+  line-height: 1.7;
 }
 
+/* 单元格：长说明自然换行，不靠 nowrap 把整表拉宽 */
 .vp-doc th,
 .vp-doc td {
   border: 0;
   border-bottom: 1px solid var(--ee-rule);
-  padding: 0.5rem 0.7rem;
+  padding: 0.62rem 0.8rem;
   text-align: left;
   vertical-align: top;
   background: transparent;
+  overflow-wrap: break-word;
 }
 
 .vp-doc tr:last-child td {
@@ -427,7 +479,7 @@ html {
 .vp-doc th {
   font-weight: 600;
   font-size: 0.82rem;
-  letter-spacing: 0.02em;
+  letter-spacing: 0;
   color: var(--ee-ink-2);
   border-bottom: 1px solid var(--ee-rule-strong);
 }
@@ -475,10 +527,11 @@ html {
    目录（On this page）：页边注的形态
    ===================================================================== */
 
+/* 右侧目录：比正文再小一档；当前节铜色加粗，不用色块 */
 .VPDocAsideOutline .outline-title {
   font-size: 0.76rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.02em;
   text-transform: none;
   color: var(--ee-ink-3);
   padding-bottom: var(--ee-step-1);
@@ -486,14 +539,19 @@ html {
 }
 
 .VPDocAsideOutline .outline-link {
-  font-size: 0.8rem;
-  line-height: 1.6;
-  color: var(--ee-ink-3);
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--ee-ink-2);
+  padding-block: 0.12rem;
 }
 
-.VPDocAsideOutline .outline-link:hover,
+.VPDocAsideOutline .outline-link:hover {
+  color: var(--ee-copper);
+}
+
 .VPDocAsideOutline .outline-link.active {
   color: var(--ee-copper);
+  font-weight: 600;
 }
 
 .VPDocAsideOutline .outline-marker {
@@ -571,6 +629,7 @@ html {
 .arch-chip {
   display: inline-flex;
   align-items: center;
+  min-height: 1.75rem;
   padding: 0.12rem 0.55rem;
   border: 1px solid var(--ee-rule);
   border-radius: 0;
@@ -851,41 +910,47 @@ html {
   color: var(--ee-ink-3);
 }
 
-/* Mermaid */
+/* Mermaid：图不整体缩小到手机宽度，超宽时在容器内横向滚动 */
 .mermaid-block {
   margin: var(--ee-step-3) 0;
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.mermaid-block .mermaid {
+  min-width: 32rem;
+}
+
+.mermaid-block svg {
+  height: auto;
 }
 
 /* =====================================================================
    首页：一张路线索引表，不是九张卡片
+   真实 DOM：.VPPage > div[style]（VitePress 渲染层）> div（markdown 内容）
+   所有选择器都限定到内容层，不碰渲染层的定位。
    ===================================================================== */
 
-.VPPage {
-  padding: 0;
-}
-
-/* VPPage 的内容没有 .vp-doc 包裹，样式直接落在页面子树里 */
-.VPPage > div {
-  max-width: 64rem;
-  margin: 0 auto;
-  padding: 3.2rem 1.5rem 4.5rem;
-}
-
+/* 内容层：与正文同版心，居中，上下留白 */
 .VPPage > div > div {
-  font-size: 17px;
+  max-width: var(--ee-measure-home);
+  margin: 0 auto;
+  padding: 3.4rem 1.5rem 5rem;
+  font-size: 1.06rem;
   line-height: 1.8;
   color: var(--ee-ink);
 }
 
-/* 首页标题：主张本身，不是页头 */
-.VPPage h1 {
-  font-size: clamp(2rem, 1.35rem + 3.1vw, 3.3rem);
-  font-weight: 700;
-  letter-spacing: -0.035em;
-  line-height: 1.1;
-  max-width: 16ch;
+/* 主张本身，不是页头。中文标题：行高放宽、不做负字距、两行均衡 */
+.VPPage > div > div > h1 {
+  max-width: 20em;
   margin: 0;
   padding: 0;
+  font-size: clamp(1.95rem, 1.4rem + 2.6vw, 3rem);
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: 1.28;
+  text-wrap: balance;
   color: var(--ee-ink);
 }
 
@@ -893,62 +958,74 @@ html {
   display: none;
 }
 
-.VPPage a {
+/* 首页链接与正文同一种可点表现 */
+.VPPage > div > div a {
   color: var(--ee-copper);
   font-weight: 500;
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
   text-decoration-color: var(--ee-copper-line);
+  text-decoration-skip-ink: auto;
   transition: text-decoration-thickness 0.15s ease, color 0.15s ease;
 }
 
-.VPPage a:hover {
+.VPPage > div > div a:hover {
   text-decoration-thickness: 2px;
   text-decoration-color: var(--ee-copper);
 }
 
-.VPPage p:nth-of-type(1) {
-  max-width: 46rem;
+/* 导语：首屏的第二个声音，比正文浅一档、短一档 */
+.VPPage > div > div > p:first-of-type {
+  max-width: var(--ee-measure-lead);
+  margin: 1.2rem 0 0;
+  font-size: 1.02rem;
+  line-height: 1.85;
+  color: var(--ee-ink-2);
+}
+
+/* 入口引导：与索引之间隔一段空白，不加框、不套卡片 */
+.VPPage > div > div > p:nth-of-type(2) {
+  max-width: var(--ee-measure-lead);
   margin: 1.1rem 0 0;
-  font-size: 1rem;
+  font-size: 0.98rem;
   line-height: 1.85;
   color: var(--ee-ink-2);
 }
 
 /* 路线索引：一行一个板块，横线分章 */
-.VPPage ul {
+.VPPage > div > div > ul {
   list-style: none;
-  margin: 2.6rem 0 0;
+  margin: 2.4rem 0 0;
   padding: 0;
   border-top: 1px solid var(--ee-rule-strong);
   border-bottom: 1px solid var(--ee-rule);
 }
 
-.VPPage li {
+.VPPage > div > div > ul > li {
   position: relative;
   display: grid;
-  grid-template-columns: 3.2rem minmax(0, 1fr);
+  grid-template-columns: 3.4rem minmax(0, 1fr);
   gap: 0 1.1rem;
   margin: 0;
-  padding: 1rem 0.2rem 1rem 0;
+  padding: 0.95rem 0.2rem 0.95rem 0;
   border-bottom: 1px solid var(--ee-rule);
 }
 
-.VPPage li:last-child {
+.VPPage > div > div > ul > li:last-child {
   border-bottom: 0;
 }
 
 /* 段落容器让位，元素直接落进 li 的两列网格 */
-.VPPage li > p {
+.VPPage > div > div > ul > li > p {
   display: contents;
 }
 
-/* 一次成型的动效：铜线从左侧画出 */
-.VPPage li::after {
+/* 一次成型的动效：铜线从左画出 */
+.VPPage > div > div > ul > li::after {
   content: "";
   position: absolute;
-  left: 0;
+  inset-inline-start: 0;
   bottom: -1px;
   height: 1px;
   width: 0;
@@ -956,61 +1033,64 @@ html {
   transition: width 0.32s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.VPPage li:hover::after {
+.VPPage > div > div > ul > li:hover::after,
+.VPPage > div > div > ul > li:focus-within::after {
   width: 100%;
 }
 
 .VPPage .idx-no {
   grid-column: 1;
+  padding-top: 0.32rem;
   font-family: var(--ee-mono);
   font-size: 0.82rem;
   line-height: 1.4;
   letter-spacing: 0.02em;
   font-variant-numeric: tabular-nums;
   color: var(--ee-copper);
-  padding-top: 0.35rem;
 }
 
-.VPPage li > strong,
-.VPPage li > p > strong {
+.VPPage > div > div > ul > li > strong,
+.VPPage > div > div > ul > li > p > strong {
   grid-column: 2;
 }
 
-/* 标题是用 ink 显示的，不是链接色；悬停才给铜色 + 下划线 */
-.VPPage li > strong > a,
-.VPPage li > p > strong > a {
-  font-size: 1.08rem;
+/* 板块名用墨色：它是导航，不是广告；悬停才转铜色 */
+.VPPage > div > div > ul > li > strong > a,
+.VPPage > div > div > ul > li > p > strong > a {
+  font-size: 1.06rem;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
   color: var(--ee-ink);
   text-decoration: none;
   transition: color 0.15s ease;
 }
 
-.VPPage li > strong > a:hover,
-.VPPage li > p > strong > a:hover {
+.VPPage > div > div > ul > li > strong > a:hover,
+.VPPage > div > div > ul > li > p > strong > a:hover {
   color: var(--ee-copper);
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
 }
 
+/* 一句说明：限宽，避免跨出九百多像素的长行 */
 .VPPage .idx-gist {
   display: block;
   grid-column: 2;
-  margin-top: 0.15rem;
-  font-size: 0.9rem;
-  line-height: 1.7;
+  max-width: 36rem;
+  margin-top: 0.2rem;
+  font-size: 0.92rem;
+  line-height: 1.75;
   color: var(--ee-ink-2);
 }
 
-/* 其余入口：一条细线上的四个名字 */
-.VPPage p:nth-of-type(2) {
+/* 其余入口：末段的次级导航，用一条细线与索引分开 */
+.VPPage > div > div > p:last-of-type {
   max-width: none;
-  margin: 2.2rem 0 0;
+  margin: 2rem 0 0;
   padding-top: 1.1rem;
   border-top: 1px solid var(--ee-rule);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   line-height: 2;
   color: var(--ee-ink-3);
 }
@@ -1019,26 +1099,48 @@ html {
    响应式
    ===================================================================== */
 
+/* =====================================================================
+   响应式：断点放在内容开始塌的地方，不套设备预设
+   1279 两栏目录开始挤压；1023 是 VitePress 收侧栏；900 表格先撑不住；
+   720 双列组件转单列；480 手机竖屏
+   ===================================================================== */
+
+/* 中等宽度：VitePress 在 1280 以下收起右侧目录，正文改用满宽版心即可 */
+@media (max-width: 1279px) {
+  .VPDoc .content-container {
+    margin-inline: auto;
+  }
+}
+
 @media (max-width: 1023px) {
-  .VPPage > div {
+  .VPPage > div > div {
     padding-top: 2.4rem;
   }
-  .VPPage h1 {
+  .VPPage > div > div > h1 {
     max-width: none;
+  }
+}
+
+/* 表格比正文先撑不住：从 900 起改成局部横向滚动，整页仍不溢出 */
+@media (max-width: 900px) {
+  .vp-doc table,
+  .campus-grid table {
+    display: block;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    min-width: 30rem;
   }
 }
 
 @media (max-width: 720px) {
   .vp-doc {
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 1.8;
   }
-  /* 窄屏：数据表改为横向滚动，不撑破版心 */
   .vp-doc table,
   .campus-grid table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
+    min-width: 26rem;
+    font-size: 0.86rem;
   }
   .campus-hero {
     grid-template-columns: 1fr;
@@ -1053,10 +1155,15 @@ html {
   .campus-ladder__row--3 {
     margin-left: 0;
   }
-  .idx-list li,
-  .VPPage li {
-    grid-template-columns: 2.4rem minmax(0, 1fr);
+  .VPPage > div > div {
+    padding: 2.2rem 1.1rem 3.6rem;
+  }
+  .VPPage > div > div > ul > li {
+    grid-template-columns: 2.6rem minmax(0, 1fr);
     gap: 0 0.8rem;
+  }
+  .mermaid-block .mermaid {
+    min-width: 26rem;
   }
 }
 
@@ -1077,13 +1184,34 @@ html {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .idx-list li::after,
-  .VPPage li::after {
-    transition: none;
+/* 手机竖屏：标题回到小一档，靠行高而不是字号撑气势 */
+@media (max-width: 480px) {
+  .VPPage > div > div > h1 {
+    font-size: 1.85rem;
+    line-height: 1.34;
   }
-  .vp-doc a {
-    transition: none;
+  .vp-doc h1 {
+    font-size: 1.55rem;
+  }
+  .vp-doc h2 {
+    font-size: 1.26rem;
+  }
+}
+
+/* 触屏上不保留粘滞的 hover 效果 */
+@media (hover: none) {
+  .VPPage > div > div > ul > li:hover::after {
+    width: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }
 
@@ -1142,8 +1270,58 @@ html {
   color: var(--ee-ink-2);
 }
 
+/* 搜索结果里的摘要自带 .vp-doc 包裹，要压回小字，否则继承正文版式 */
+.VPLocalSearchBox .excerpt .vp-doc {
+  font-size: 0.82rem;
+  line-height: 1.6;
+  color: var(--ee-ink-2);
+}
+
 .VPLocalSearchBox .excerpt .match {
   color: var(--ee-copper);
   text-decoration: underline;
   text-decoration-color: var(--ee-copper-line);
+}
+
+/* 搜索输入：16px 起，避免 iOS 聚焦时放大整页 */
+.VPLocalSearchBox .search-input {
+  font-size: 16px;
+  color: var(--ee-ink);
+}
+
+.VPLocalSearchBox .search-input::placeholder {
+  color: var(--ee-ink-3);
+}
+
+/* 路径与命中片段各占一档层次 */
+.VPLocalSearchBox .result .titles {
+  color: var(--ee-ink-3);
+}
+
+/* 空状态与快捷键提示 */
+.VPLocalSearchBox .no-results,
+.VPLocalSearchBox .no-results-tip {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--ee-ink-2);
+}
+
+.VPLocalSearchBox kbd {
+  border: 1px solid var(--ee-rule);
+  border-radius: 2px;
+  background: var(--ee-paper-sunk);
+  color: var(--ee-ink-2);
+  font-family: var(--ee-mono);
+  font-size: 0.72rem;
+}
+
+.VPLocalSearchBox .search-input:focus-visible,
+.VPLocalSearchBox .result:focus-visible {
+  outline: 2px solid var(--ee-copper);
+  outline-offset: 2px;
+}
+
+/* 正文里的粗体收一档：中文 700 偏重，连续强调会糊成块 */
+.vp-doc strong {
+  font-weight: 600;
 }
