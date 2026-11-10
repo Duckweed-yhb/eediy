@@ -44,6 +44,10 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # 站内链接与锚点先过一遍：断链不会让构建失败，但会让读者点空
+      - name: Check internal links and anchors
+        run: npm run check:links
+
       - name: Build with VitePress
         run: npm run docs:build
 

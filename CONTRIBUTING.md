@@ -49,7 +49,16 @@
 
 ```bash
 npm ci
+npm run check:links    # 站内死链与坏锚点，不需要网络
 npm run docs:build
+```
+
+改完链接或标题，先跑 `check:links`：它比对每个 `/path#anchor` 是否指到真实文件与真实标题。锚点错了构建不会报错，但读者点过去会落在页面顶部。
+
+想连外链一起体检（需要网络，走代理时先设 `HTTP_PROXY`）：
+
+```bash
+npm run check:links:external
 ```
 
 构建通过再提 PR。**不要通过配置 `ignoreDeadLinks` 来掩盖死链**——那是把问题藏起来，不是修好它。
