@@ -12,6 +12,16 @@ export default defineConfig({
   title: 'EE自学指南',
   description: 'EE（电气电子工程）自学路线与笔记归档',
   lang: 'zh-CN',
+  // 首屏就套上读者上次选的配色，避免先闪一下默认色
+  transformHead() {
+    return [
+      [
+        'script',
+        {},
+        "try{var t=localStorage.getItem('eediy-theme');document.documentElement.dataset.theme=['cyber','romance','ink'].indexOf(t)>-1?t:'paper'}catch(e){document.documentElement.dataset.theme='paper'}"
+      ]
+    ]
+  },
   markdown: {
     config(md) {
       mermaidMarkdown(md)
