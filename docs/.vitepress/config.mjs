@@ -12,6 +12,11 @@ export default defineConfig({
   title: 'EE自学指南',
   description: 'EE（电气电子工程）自学路线与笔记归档',
   lang: 'zh-CN',
+  // 生成 sitemap。hostname 要带 Pages 子路径，而且**必须以 / 结尾**：
+  // 生成器用 new URL(page, hostname)，结尾没有斜杠时最后一段会被当成文件名替换掉。
+  sitemap: {
+    hostname: 'https://duckweed-yhb.github.io/eediy_wiki/'
+  },
   // 首屏就套上读者上次选的配色，避免先闪一下默认色
   transformHead() {
     return [

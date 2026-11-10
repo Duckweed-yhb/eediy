@@ -4,6 +4,7 @@ sidebar: false
 aside: false
 title: EE 自学指南
 titleTemplate: 电气电子工程自学路线
+description: 一门以「能跑、能测、能验收」为标准的 EE 自学指南：四层学习结构、五条方向线、八个内容板块。
 ---
 
 # 电气不是背出来的，是接出来的
