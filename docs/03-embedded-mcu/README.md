@@ -118,7 +118,7 @@ STM32 是目前国内电赛、考研复试、工业界用得最广的 ARM Cortex
 | 《STM32F4 开发实战——标准库 + 寄存器》 / 同系列 STM32 教材 | 刘军 / 正点原子团队 | 历年版 | GPIO、中断、定时器、串口、I2C、SPI、ADC、DMA | 正点原子资料下载中心：http://www.openedv.com/ （教材与开发板配套，不提供盗版 PDF） |
 | 《嵌入式系统设计——基于 STM32CubeMX 与 HAL 库》 | 漆强 | 高等教育出版社，2022 | HAL 库开发全流程 | 电子科大 MOOC 配套教材，京东 / 淘宝可购 |
 | 《ARM Cortex-M3 权威指南》 | Joseph Yiu 著，宋岩 译 | 北京航空航天大学出版社 | Cortex-M 内核、NVIC、中断、存储器模型 | 中文经典，配合 ARM 官方 TRM |
-| STM32 参考手册（RM0090 等） | STMicroelectronics | 按型号分册 | 片上外设寄存器说明 | ST 官方文档站：https://www.st.com/en/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html ；STM32 MCU Wiki：https://wiki.st.com/stm32mcu/ |
+| STM32 参考手册（RM0090 等） | STMicroelectronics | 按型号分册 | 片上外设寄存器说明 | ST 官方文档站（中文）：https://www.st.com/zh/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html （原 ST MCU wiki 已下线，2026-11-11 核验） |
 | STM32 数据手册（Data Sheet） | STMicroelectronics | 按型号分册 | 引脚定义、电气参数、封装 | 同上，芯片产品页下载 |
 | FreeRTOS 内核手册 | Amazon Web Services | 最新版 | API 函数、配置项、移植说明 | 在线免费：https://www.freertos.org/Documentation/00-Overview |
 | 《Arduino 编程从入门到精通》类教材 | 人民邮电 / 清华社等 | 按需 | Arduino 入门 | Arduino 官方文档已足够：https://docs.arduino.cc/ |

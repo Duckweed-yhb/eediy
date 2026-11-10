@@ -154,7 +154,7 @@
 | 课程官网 | ST X-CUBE-MCSDK 官方页 | https://www.st.com/en/embedded-software/x-cube-mcsdk.html | 英文，SDK 下载与授权说明 |
 | 视频录像 | ST 中文电机控制生态页 | https://www.st.com.cn/content/st_com/zh/ecosystems/stm32-motor-control-ecosystem.html | 中文，含演示视频与开发板选型 |
 | 教材 | PMSM Single/Dual FOC 库开发者指南（中文 PDF） | https://www.st.com/resource/zh/user_manual/cd00298482-advanced-developer-s-guide-for-stm32f-mcus-pmsm-single-dual-foc-library-stmicroelectronics.pdf | 中文官方手册，直接对着代码读 |
-| 作业 / 实验 | ST Motor Control FAQ wiki + SDK Getting Started | https://wiki.st.com/stm32mcu/wiki/STM32MotorControl:Frequently_Asked_Questions | 英文 wiki，FAQ 覆盖调参、观测器、采样电阻等工程坑 |
+| 作业 / 实验 | ST 官方社区（搜 Motor Control）+ SDK Getting Started | https://community.st.com/ | 原 ST MCU wiki 的 Motor Control FAQ 已随 wiki 下线；社区里调参、观测器、采样电阻的问答仍在，按关键词搜 |
 | 自学建议 | — | — | 按 SDK 6.x Getting Started 顺序：先 Motor Pilot 调通开环 → 电流环 → 速度环 → 无感观测器；配合中文开发者指南逐章读代码 |
 
 ## 教材与参考书

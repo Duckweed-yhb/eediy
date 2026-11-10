@@ -41,7 +41,7 @@
 | 课程 | 平台 | 链接 | 说明 | 对应板块 |
 |---|---|---|---|---|
 | Arduino 官方教程 | Arduino | <https://docs.arduino.cc/learn/> | 官方免费入门教程 | 03 嵌入式与单片机 |
-| STM32 MCU 官方 wiki | ST | <https://wiki.st.com/stm32mcu/> | ST 官方 STM32 开发文档与例程 | 03 嵌入式与单片机 |
+| STM32 MCU 产品与文档入口 | ST | <https://www.st.com/zh/microcontrollers-microprocessors/stm32-32-bit-arm-cortex-mcus.html> | 按型号进 RM / DS 与例程；原 ST MCU wiki 已下线 | 03 嵌入式与单片机 |
 | ARM Cortex-M 官方文档 | ARM | <https://developer.arm.com/documentation/> | 内核与外设手册入口 | 03 嵌入式与单片机 |
 
 ### 信号与通信
