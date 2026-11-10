@@ -50,7 +50,7 @@
 
 ### LTspice
 
-- **官方站点**：<https://www.analog.com/resources/design-tools-and-calculators/ltspice-simulator.html>
+- **官方站点**：<https://www.analog.com/en/resources/design-tools-and-calculators/ltspice-simulator.html>
 - **上手要点**：ADI 免费提供的高性能 SPICE，原生模型库覆盖绝大多数 ADI / Linear 电源与运放，仿真速度快。新手第一个动作：下载后打开自带的桥整流 + 电容滤波例程，跑瞬态仿真看波纹。电源、模拟前端首选。
 - **对应板块**：02 电路与电子学、05 电力系统。
 
@@ -111,6 +111,13 @@
 - **说明**：Windows 常用 SSCOM / XCOM，跨平台用 PuTTY / minicom / `screen`；VS Code 可装 Serial Monitor 插件。
 - **上手要点**：USB 转串口（CH340 / CP2102）装好驱动，波特率与 MCU 工程一致（常用 115200 8N1）。新手第一个动作：把开发板 USB 插入后在设备管理器找到 COM 口，打开助手看到 Hello World 打印。
 - **对应板块**：03 嵌入式与单片机、08 硬件工具链。
+
+### 编程器与调试器
+
+- **说明**：STM32 常用 ST-Link（Nucleo / Discovery 板多数板载，不必另买）、J-Link（商业调试器，生态与性能最全）、DAPLink（开源固件，走 CMSIS-DAP 协议，很多国产调试器基于它）。先用板载调试器，遇到下载慢、断点受限或要调试裸芯片时再换独立调试器。ST 官网的调试器产品页地址经常变动，这里不挂可能失效的直链，按型号在 ST 站内检索。
+- **官方站点**：SEGGER J-Link <https://www.segger.com/products/debug-probes/j-link/> ｜ DAPLink <https://daplink.io/>
+- **上手要点**：SWD 只需四根线——SWCLK、SWDIO、GND、目标板 VREF（给电平参考）；接线前确认目标板是否自供电，避免两边同时供电。新手第一个动作：在 CubeIDE 里对 LED 闪烁程序打一个断点，单步看变量，再试「复位后停在 main 第一条」。
+- **对应板块**：03 嵌入式与单片机、07 数字逻辑与 FPGA（FPGA 用 JTAG，概念相近但接口与工具链不同）。
 
 ## 开发与版本管理
 
