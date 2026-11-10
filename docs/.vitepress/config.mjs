@@ -23,20 +23,37 @@ export default defineConfig({
   themeConfig: {
     nav: [
       { text: '前言', link: '/preface' },
+      { text: '怎么用', link: '/guide' },
+      { text: '课程体系', link: '/curriculum' },
+      { text: '方向分流', link: '/directions' },
       { text: '路线地图', link: '/roadmap' },
-      { text: '路线总览', link: '/README' },
       { text: '同校指南', link: '/campus/hitsz-ee/' },
-      { text: '附录', link: '/appendix/README' },
-      { text: '数理与编程基础', link: '/01-math-programming/README' }
+      { text: '附录', link: '/appendix/README' }
     ],
     sidebar: [
       {
         text: '总览',
         items: [
           { text: '前言 · 为什么做这个站', link: '/preface' },
+          { text: '如何使用本站（三类读者）', link: '/guide' },
+          { text: '一条贯通路线（C → 电路 → MCU → 项目）', link: '/start' },
+          { text: '课程体系（四层结构）', link: '/curriculum' },
+          { text: '共同基础（必须 vs 边做边补）', link: '/foundation' },
+          { text: '方向分流（五条线）', link: '/directions' },
+          { text: '嵌入式方向路线（完整示范）', link: '/directions/embedded' },
           { text: '路线地图（依赖图 · 架构图）', link: '/roadmap' },
-          { text: '路线总览（板块索引）', link: '/README' },
+          { text: '板块索引（路线总览）', link: '/README' },
           { text: '附录总览', link: '/appendix/README' }
+        ]
+      },
+      {
+        text: '课程页',
+        collapsed: true,
+        items: [
+          { text: 'Harvard CS50x · C 语言部分', link: '/courses/cs50-c' },
+          { text: '西安交通大学《电路》', link: '/courses/circuit-xjtu' },
+          { text: '浙江大学 · STM32 嵌入式系统', link: '/courses/stm32-zju' },
+          { text: '课程模板（写新课程页用）', link: '/templates/course-template' }
         ]
       },
       {
@@ -50,6 +67,15 @@ export default defineConfig({
           { text: '06 信号与通信', link: '/06-signal-communication/README' },
           { text: '07 数字逻辑与 FPGA', link: '/07-digital-fpga/README' },
           { text: '08 硬件工具链', link: '/08-hardware-toolchain/README' }
+        ]
+      },
+      {
+        text: '个人笔记',
+        collapsed: true,
+        items: [
+          { text: 'C 语言学习笔记', link: '/01-math-programming/c-language' },
+          { text: '概率论与数理统计笔记', link: '/01-math-programming/probability-statistics' },
+          { text: '大学物理笔记（热学 · 光学 · 量子）', link: '/01-math-programming/university-physics-thermal-optics-quantum' }
         ]
       },
       {
@@ -122,6 +148,41 @@ export default defineConfig({
       }
     ],
     outline: { level: [2, 3] },
-    socialLinks: [{ icon: 'github', link: 'https://github.com/Duckweed-yhb/eediy_wiki' }]
+    socialLinks: [{ icon: 'github', link: 'https://github.com/Duckweed-yhb/eediy_wiki' }],
+    // 站内搜索：默认分词按空格切，中文句子会被当成一个整词，搜「指针」搜不出来。
+    // 这里改成中文按二元组切（相邻两字一个 token），英文与数字整体保留。
+    search: {
+      provider: 'local',
+      options: {
+        miniSearch: {
+          options: {
+            tokenize: (text) => {
+              const tokens = []
+              const re = /[\u3400-\u9fff]+|[A-Za-z0-9_+#.-]+/g
+              let m
+              while ((m = re.exec(text)) !== null) {
+                const seg = m[0]
+                if (/^[\u3400-\u9fff]/.test(seg)) {
+                  if (seg.length === 1) {
+                    tokens.push(seg)
+                  } else {
+                    // 只切二元组：搜「指针」能命中「数组与指针」，且不会因为单字 token 让结果爆炸
+                    for (let i = 0; i < seg.length - 1; i++) tokens.push(seg.slice(i, i + 2))
+                  }
+                } else {
+                  tokens.push(seg.toLowerCase())
+                }
+              }
+              return tokens
+            }
+          },
+          searchOptions: {
+            boost: { title: 4, text: 2, titles: 1 },
+            fuzzy: 0.2,
+            prefix: true
+          }
+        }
+      }
+    }
   }
 })

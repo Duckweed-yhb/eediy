@@ -1086,3 +1086,64 @@ html {
     transition: none;
   }
 }
+
+/* =====================================================================
+   站内搜索：默认主题是圆角胶囊 + 阴影，这里收回成方角 1px 线
+   ===================================================================== */
+
+.DocSearch-Button {
+  border-radius: 0 !important;
+  border: 1px solid var(--ee-rule);
+  background: transparent;
+  color: var(--ee-ink-2);
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.DocSearch-Button:hover {
+  border-color: var(--ee-copper-line);
+  background: var(--ee-copper-soft);
+  color: var(--ee-ink);
+}
+
+.DocSearch-Button .DocSearch-Search-Icon {
+  color: currentColor;
+}
+
+.VPLocalSearchBox .shell {
+  border-radius: 0;
+  border: 1px solid var(--ee-rule-strong);
+  background: var(--ee-paper);
+  box-shadow: none;
+}
+
+.VPLocalSearchBox .search-bar {
+  border-bottom: 1px solid var(--ee-rule);
+}
+
+.VPLocalSearchBox .results {
+  border-radius: 0;
+}
+
+.VPLocalSearchBox .result {
+  border-radius: 0;
+  border: 1px solid transparent;
+}
+
+.VPLocalSearchBox .result[aria-selected='true'] {
+  background: var(--ee-copper-soft);
+  border-color: var(--ee-copper-line);
+}
+
+.VPLocalSearchBox .result .title {
+  color: var(--ee-ink);
+}
+
+.VPLocalSearchBox .result .excerpt {
+  color: var(--ee-ink-2);
+}
+
+.VPLocalSearchBox .excerpt .match {
+  color: var(--ee-copper);
+  text-decoration: underline;
+  text-decoration-color: var(--ee-copper-line);
+}

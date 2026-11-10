@@ -5,8 +5,9 @@
 ## 路线位置
 
 - **前置**：[01 数理与编程基础](../01-math-programming/README.md)。
-- **通往**：[03 嵌入式与单片机](../03-embedded-mcu/README.md)、[07 数字逻辑与 FPGA](../07-digital-fpga/README.md)、[04 电机与运动控制](../04-motor-control/README.md)。
+- **通往**：[03 嵌入式与单片机](../03-embedded-mcu/README.md)、[07 数字逻辑与 FPGA](../07-digital-fpga/README.md)、[04 电机与运动控制](../04-motor-control/README.md)、[05 电力系统](../05-power-system/README.md)。
 - **学习顺序建议**：电路原理先行，模电、数电可并行；做板子前先把常用器件和基本电路过一遍。
+- **课程页**：[西安交通大学《电路》原理](/courses/circuit-xjtu) —— 主推荐理由、实验三个层次（纯仿真 / 面包板 / 示波器）、完成标准。
 
 ## 核心公开课与课程
 
@@ -137,7 +138,7 @@
 ## 习题、实验与动手练习
 
 - **电路课后题**：邱关源《电路》每章精选习题手写推导，重点做戴维南等效、一阶瞬态、相量法分析。
-- **LTspice 仿真实验**：每学完一个电路（分压、RC 充放电、共射放大），在 LTspice 里搭一遍并对比手算结果。下载地址：https://www.analog.com/resources/design-tools-and-calculators/ltspice-simulator.html
+- **LTspice 仿真实验**：每学完一个电路（分压、RC 充放电、共射放大），在 LTspice 里搭一遍并对比手算结果。官网下载页：https://www.analog.com/en/resources/design-tools-and-calculators/ltspice-simulator.html （2026-11-11 访问确认可打开，页面标为免费）
 - **Multisim 仿真**：哈工大 / 清华 MOOC 配套实验，适合模电放大电路与数电逻辑门仿真。
 - **立创 EDA 在线仿真**：https://lceda.cn/ ，国产在线电路设计工具，可做简单电路仿真与 PCB 绘制。
 - **面包板实操**：买一套面包板 + 杜邦线 + 常用电阻电容 LED，搭分压电路、RC 闪烁灯、运放反相放大。

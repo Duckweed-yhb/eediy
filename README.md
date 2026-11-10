@@ -9,7 +9,14 @@ EE（电气电子工程）自学路线与笔记归档。参照 csdiy.wiki 的组
 ```text
 eediy_wiki/
 ├── docs/                          VitePress 站点根目录
-│   ├── index.md                  站点首页（板块卡片导航）
+│   ├── index.md                  站点首页（论点标题 + 板块索引）
+│   ├── guide.md                  如何使用本站（三类读者、判断基础、选课原则、时间安排）
+│   ├── curriculum.md             课程体系（四层结构、共同基础、覆盖检查、参考项目对照）
+│   ├── foundation.md             共同基础（必须 vs 边做边补、测量与实验方法）
+│   ├── directions.md             方向分流（五条线的课程链、第一个项目、缺口优先级）
+│   ├── directions/embedded.md    嵌入式与硬件系统：S0–S6 完整路线
+│   ├── courses/                  课程页（CS50x C 部分 / 西交电路 / 浙大 STM32）
+│   ├── start.md                  一条贯通路线（C 语言 → 电路 → MCU → 可验收项目）
 │   ├── README.md                 EE 自学路线总览（板块关系与推荐顺序）
 │   ├── roadmap.md                路线地图（课程前置依赖图 + 硬件→软件分层架构图）
 │   ├── appendix/                 附录：电子书、公开课、资源网站、工具清单
@@ -38,13 +45,21 @@ eediy_wiki/
 │           ├── index.md           总览：课内 / 课外两条主线与学期导航
 │           ├── curriculum/        课内：总览 + 12 个学期页（秋 / 春 / 夏 × 四学年）
 │           └── beyond/            课外：总览 + 竞赛 / 项目 / 实习
-├── .github/workflows/deploy.yml   GitHub Actions 自动构建并部署到 Pages
+├── .github/workflows/deploy.yml   构建与部署（PR 只做构建检查，main 推送才部署）
+├── CONTRIBUTING.md                参与维护：新增课程、资源核验、笔记规范
+├── DESIGN.md                      视觉规范（改样式之前先读它）
 ├── package.json                   VitePress 依赖与脚本
 └── LICENSE                        MIT License
 ```
 
 ## 路线总览
 
+- 不知道从哪开始：[如何使用本站](docs/guide.md) —— 三类读者（零基础探索 / 在校补课 / 进方向）、基础自检、选一门主课的原则、时间安排示例。
+- 整体结构：[课程体系](docs/curriculum.md) —— 四层结构（入门体验 / 共同基础 / 方向分流 / 综合实践）、EE 核心知识块覆盖检查、参考项目对照。
+- 共同基础：[docs/foundation.md](docs/foundation.md) —— 哪些必须先有、哪些可以边做边补、测量与实验的四步方法。
+- 方向选择：[方向分流](docs/directions.md) —— 五条线的课程链、第一个项目、缺口与优先级；其中 [嵌入式](docs/directions/embedded.md) 是完整示范路线（S0–S6）。
+- 课程页：[docs/courses/](docs/courses/) —— 每门核心课的先修、主推荐理由、替代资源、投入（官方与编辑估计分开）、完成标准、核验日期。
+- 最短路径：[一条贯通路线](docs/start.md) —— C 语言 → 电路与数字逻辑 → MCU 外设 → 一个可验收的小项目。
 - 图形化全局关系：[docs/roadmap.md](docs/roadmap.md) —— 课程前置依赖图与硬件→软件分层架构图。
 - 板块关系、前置依赖与推荐学习顺序：[docs/README.md](docs/README.md)。
 - 跨板块资源汇总（电子书、公开课、网站、工具）：[docs/appendix/README.md](docs/appendix/README.md)。
@@ -66,7 +81,7 @@ eediy_wiki/
 > 需要 Node.js 18+（云端 CI 固定使用 20）；在仓库根目录执行。
 
 ```bash
-npm install
+npm ci                 # 按 package-lock.json 精确安装，和 CI 保持一致
 npm run docs:dev       # 本地预览
 npm run docs:build     # 构建静态站点到 docs/.vitepress/dist
 npm run docs:preview   # 本地预览构建产物
@@ -88,6 +103,7 @@ npm run docs:preview   # 本地预览构建产物
 - 外部课程、教材、习题登记在板块 README 对应分区，写清名称、链接与一句话说明；自己写的笔记放在「我的笔记」。
 - 跨板块的电子书、公开课平台、资源网站与通用工具统一登记在 [docs/appendix/](docs/appendix/README.md)，不与板块内专属资源重复维护。
 - 尚未收集到的内容保留「（待补充）」占位，不凭印象填写课程名或链接。
+- 完整规则见 [CONTRIBUTING.md](CONTRIBUTING.md)：三类内容（课程条目 / 个人笔记 / 站点说明）的边界、资源核验怎么标日期、事实性内容怎么注明来源。
 
 ## 许可证
 
