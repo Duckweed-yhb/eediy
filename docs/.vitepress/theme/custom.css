@@ -28,16 +28,16 @@
     "SF Mono", Menlo, monospace;
 
   /* —— 版式节奏：一套尺度，按层级取用 —— */
-  --ee-measure: 46rem; /* 正文版心，中文约 38–42 字一行 */
-  --ee-measure-lead: 42rem; /* 导语与说明块，比正文短一档 */
-  --ee-measure-home: 46rem; /* 首页与正文同版心，索引行不跨长线 */
+  --ee-measure: 48rem; /* 正文版心，中文约 44 字一行 */
+  --ee-measure-lead: 44rem; /* 导语与说明块，比正文短一档 */
+  --ee-measure-home: 48rem; /* 首页与正文同版心，索引行不跨长线 */
   --ee-scroll-offset: calc(var(--vp-nav-height, 56px) + 1rem);
   --ee-hit: 2.25rem; /* 可点条目的最小高度 */
-  --ee-step-1: 0.4rem;
-  --ee-step-2: 0.75rem;
-  --ee-step-3: 1.15rem;
-  --ee-step-4: 1.8rem;
-  --ee-step-5: 2.8rem;
+  --ee-step-1: 0.45rem;
+  --ee-step-2: 0.85rem;
+  --ee-step-3: 1.25rem;
+  --ee-step-4: 2rem;
+  --ee-step-5: 3.2rem;
 
   /* —— 映射到 VitePress —— */
   --vp-c-bg: var(--ee-paper);
@@ -166,7 +166,7 @@ html {
 }
 
 .VPNavBar .VPNavBarMenuLink {
-  font-size: 0.84rem;
+  font-size: 0.9rem;
   font-weight: 500;
   letter-spacing: 0;
 }
@@ -191,7 +191,7 @@ html {
 /* 分组标题不再画横线：八组各一条线，互相打架 */
 .VPSidebar .VPSidebarItem.level-0 .text {
   padding-bottom: 0.3rem;
-  font-size: 0.72rem;
+  font-size: 0.76rem;
   font-weight: 600;
   letter-spacing: 0.06em;
   color: var(--ee-ink-3);
@@ -206,7 +206,7 @@ html {
 .VPSidebarItem.level-2 .text,
 .VPSidebarItem.level-3 .text,
 .VPSidebarItem.level-4 .text {
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   line-height: 1.45;
   color: var(--ee-ink-2);
 }
@@ -226,8 +226,9 @@ html {
 }
 
 .VPSidebarItem.level-2 .text,
-.VPSidebarItem.level-3 .text {
-  font-size: 0.84rem;
+.VPSidebarItem.level-3 .text,
+.VPSidebarItem.level-4 .text {
+  font-size: 0.88rem;
   color: var(--ee-ink-3);
 }
 
@@ -252,17 +253,7 @@ html {
   color: var(--ee-ink-3);
 }
 
-/* 侧栏里的层级：子组标题略小、无装饰 */
-.VPSidebarItem.level-2 .text {
-  font-size: 0.82rem;
-  color: var(--ee-ink-2);
-}
-
-.VPSidebarItem.level-3 .text,
-.VPSidebarItem.level-4 .text {
-  font-size: 0.79rem;
-  color: var(--ee-ink-3);
-}
+/* 侧栏嵌套层的字号统一在下方「侧栏」一节里定义，这里不再单独压小 */
 
 /* =====================================================================
    正文：纸面、字号、行宽
@@ -270,7 +261,7 @@ html {
 
 .vp-doc {
   /* 用 rem 而非 px：读者调大浏览器默认字号时，正文跟着变大 */
-  font-size: 1.03rem;
+  font-size: 1.08rem;
   line-height: 1.85;
   letter-spacing: 0;
   color: var(--ee-ink);
@@ -282,13 +273,15 @@ html {
   max-width: var(--ee-measure) !important;
 }
 
+/* 段落与列表跟随正文尺寸。
+   原先这里写死 1rem（16px），把 .vp-doc 的字号彻底压掉，正文实际一直是 16px。 */
 .vp-doc p,
 .vp-doc li {
-  font-size: 1rem;
+  font-size: inherit;
 }
 
 .vp-doc p {
-  margin: 0.85rem 0;
+  margin: 1.05rem 0;
   text-wrap: pretty;
 }
 
@@ -310,7 +303,7 @@ html {
 }
 
 .vp-doc h1 {
-  font-size: clamp(1.7rem, 1.3rem + 1.4vw, 2.3rem);
+  font-size: clamp(1.85rem, 1.4rem + 1.6vw, 2.5rem);
   font-weight: 700;
   letter-spacing: 0;
   line-height: 1.3;
@@ -320,7 +313,7 @@ html {
 }
 
 .vp-doc h2 {
-  font-size: 1.4rem;
+  font-size: 1.55rem;
   font-weight: 650;
   letter-spacing: 0;
   line-height: 1.4;
@@ -334,7 +327,7 @@ html {
 }
 
 .vp-doc h3 {
-  font-size: 1.1rem;
+  font-size: 1.18rem;
   font-weight: 600;
   line-height: 1.5;
   margin: var(--ee-step-4) 0 var(--ee-step-1);
@@ -342,7 +335,7 @@ html {
 }
 
 .vp-doc h4 {
-  font-size: 0.96rem;
+  font-size: 1rem;
   font-weight: 600;
   line-height: 1.5;
   margin: var(--ee-step-3) 0 var(--ee-step-1);
@@ -361,7 +354,7 @@ html {
   padding: 0 var(--ee-step-3);
   border-left: 1px solid var(--ee-copper-line);
   color: var(--ee-ink-2);
-  font-size: 0.97rem;
+  font-size: 1.02rem;
 }
 
 .vp-doc blockquote > p {
@@ -371,16 +364,16 @@ html {
 /* 列表：与正文同一字号；中文的项目符号离文字再远一点 */
 .vp-doc ul,
 .vp-doc ol {
-  margin: 0.75rem 0;
-  padding-left: 1.5rem;
+  margin: 0.95rem 0;
+  padding-left: 1.6rem;
 }
 
 .vp-doc li {
-  margin: 0.35rem 0;
+  margin: 0.4rem 0;
 }
 
 .vp-doc li > p {
-  margin: 0.35rem 0;
+  margin: 0.4rem 0;
 }
 
 .vp-doc li::marker {
@@ -435,7 +428,7 @@ html {
   border-radius: 2px !important;
   border: 1px solid var(--ee-rule);
   background: var(--ee-paper-raised) !important;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   line-height: 1.7;
 }
 
@@ -478,7 +471,7 @@ html {
   border-bottom: 1px solid var(--ee-rule-strong);
   border-collapse: collapse;
   table-layout: auto;
-  font-size: 0.9rem;
+  font-size: 0.94rem;
   line-height: 1.7;
 }
 
@@ -487,7 +480,7 @@ html {
 .vp-doc td {
   border: 0;
   border-bottom: 1px solid var(--ee-rule);
-  padding: 0.62rem 0.8rem;
+  padding: 0.7rem 0.9rem;
   text-align: left;
   vertical-align: top;
   background: transparent;
@@ -535,7 +528,7 @@ html {
 }
 
 .custom-block p {
-  font-size: 0.94rem;
+  font-size: 0.98rem;
   color: var(--ee-ink-2);
   margin: 0.4rem 0;
 }
@@ -561,10 +554,10 @@ html {
 }
 
 .VPDocAsideOutline .outline-link {
-  font-size: 0.82rem;
+  font-size: 0.86rem;
   line-height: 1.55;
   color: var(--ee-ink-2);
-  padding-block: 0.12rem;
+  padding-block: 0.14rem;
 }
 
 .VPDocAsideOutline .outline-link:hover {
@@ -957,8 +950,8 @@ html {
 .VPPage > div > div {
   max-width: var(--ee-measure-home);
   margin: 0 auto;
-  padding: 3.4rem 1.5rem 5rem;
-  font-size: 1.06rem;
+  padding: 4rem 1.5rem 5.5rem;
+  font-size: 1.08rem;
   line-height: 1.8;
   color: var(--ee-ink);
 }
@@ -968,7 +961,7 @@ html {
   max-width: 20em;
   margin: 0;
   padding: 0;
-  font-size: clamp(1.95rem, 1.4rem + 2.6vw, 3rem);
+  font-size: clamp(2.1rem, 1.5rem + 2.8vw, 3.3rem);
   font-weight: 700;
   letter-spacing: 0;
   line-height: 1.28;
@@ -1000,8 +993,8 @@ html {
 /* 导语：首屏的第二个声音，比正文浅一档、短一档 */
 .VPPage > div > div > p:first-of-type {
   max-width: var(--ee-measure-lead);
-  margin: 1.2rem 0 0;
-  font-size: 1.02rem;
+  margin: 1.4rem 0 0;
+  font-size: 1.06rem;
   line-height: 1.85;
   color: var(--ee-ink-2);
 }
@@ -1009,8 +1002,8 @@ html {
 /* 入口引导：与索引之间隔一段空白，不加框、不套卡片 */
 .VPPage > div > div > p:nth-of-type(2) {
   max-width: var(--ee-measure-lead);
-  margin: 1.1rem 0 0;
-  font-size: 0.98rem;
+  margin: 1.2rem 0 0;
+  font-size: 1.02rem;
   line-height: 1.85;
   color: var(--ee-ink-2);
 }
@@ -1027,10 +1020,10 @@ html {
 .VPPage > div > div > ul > li {
   position: relative;
   display: grid;
-  grid-template-columns: 3.4rem minmax(0, 1fr);
-  gap: 0 1.1rem;
+  grid-template-columns: 3.6rem minmax(0, 1fr);
+  gap: 0 1.2rem;
   margin: 0;
-  padding: 0.95rem 0.2rem 0.95rem 0;
+  padding: 1.1rem 0.2rem 1.1rem 0;
   border-bottom: 1px solid var(--ee-rule);
 }
 
@@ -1079,7 +1072,7 @@ html {
 /* 板块名用墨色：它是导航，不是广告；悬停才转铜色 */
 .VPPage > div > div > ul > li > strong > a,
 .VPPage > div > div > ul > li > p > strong > a {
-  font-size: 1.06rem;
+  font-size: 1.12rem;
   font-weight: 600;
   letter-spacing: 0;
   color: var(--ee-ink);
@@ -1099,9 +1092,9 @@ html {
 .VPPage .idx-gist {
   display: block;
   grid-column: 2;
-  max-width: 36rem;
-  margin-top: 0.2rem;
-  font-size: 0.92rem;
+  max-width: 38rem;
+  margin-top: 0.25rem;
+  font-size: 0.96rem;
   line-height: 1.75;
   color: var(--ee-ink-2);
 }

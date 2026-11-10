@@ -47,15 +47,17 @@
 
 | token | 值 |
 |---|---|
-| `--ee-measure` | `46rem`（正文版心，中文约 38–42 字） |
-| `--ee-measure-lead` | `42rem`（导语与说明块，比正文短一档） |
-| `--ee-measure-home` | `46rem`（首页与正文同版心） |
+| `--ee-measure` | `48rem`（正文版心，中文约 44 字） |
+| `--ee-measure-lead` | `44rem`（导语与说明块，比正文短一档） |
+| `--ee-measure-home` | `48rem`（首页与正文同版心） |
 | `--ee-scroll-offset` | `calc(导航 56px + 1rem)`（锚点跳转的顶部留白） |
-| 正文 | `1.03rem`（≈16.5px）/ line-height 1.85 / letter-spacing 0 |
-| 文档 h1 | `clamp(1.7rem, 1.3rem + 1.4vw, 2.3rem)`，700，行高 1.3 |
-| 首页 h1 | `clamp(1.95rem, 1.4rem + 2.6vw, 3rem)`，700，行高 1.28，`max-width: 20em`，`text-wrap: balance` |
-| h2 | 1.4rem / 650，行高 1.4，**上方 2.8rem、下方 0.75rem**，带 `border-top: 1px rule` |
-| h3 / h4 | 1.1rem / 0.96rem，600，行高 1.5 |
+| 节奏 | `--ee-step-1..5` = 0.45 / 0.85 / 1.25 / 2 / 3.2rem |
+| 正文 | `1.08rem`（≈17.3px）/ line-height 1.85 / letter-spacing 0 |
+| 文档 h1 | `clamp(1.85rem, 1.4rem + 1.6vw, 2.5rem)`，700，行高 1.3 |
+| 首页 h1 | `clamp(2.1rem, 1.5rem + 2.8vw, 3.3rem)`，700，行高 1.28，`max-width: 20em`，`text-wrap: balance` |
+| h2 | 1.55rem / 650，行高 1.4，**上方 3.2rem、下方 0.85rem**，带 `border-top: 1px rule` |
+| h3 / h4 | 1.18rem / 1rem，600，行高 1.5 |
+| 侧栏 | 组标题 0.76rem / 0.06em；条目 0.92rem；嵌套 0.88rem |
 | 外壳 | `--vp-sidebar-width 16.5rem`、`--vp-nav-height 56px`、`--vp-layout-max-width 1520px` |
 | 字号单位 | 正文用 `rem`，跟随读者浏览器字号；不引入自有字体文件 |
 
@@ -169,3 +171,12 @@
 - 侧栏：分组标题去掉下划线（八组各一条线互相打架），改为 1.8rem 上间距分节；嵌套层加 1px 引导线；当前项改用 1px 铜线 + 负 margin 回位。
 - `docs:build` exit 0（15.70s），产物 CSS 134KB；`eediy-theme` 内联脚本与 `.theme-switcher` 均出现在产物 HTML 中。
 - **未做视觉验收**：没有浏览器渲染工具，四套主题在明暗两种模式下的观感、切换器下拉定位、移动端按钮收起后的排布，均未截图确认。
+
+## 13. 验证记录（2026-11-11 整体放大一档）
+
+- **找到「字小」的真因**：`.vp-doc` 定的是 16.5px，但紧跟一条 `.vp-doc p, .vp-doc li { font-size: 1rem }` 把段落与列表压回 16px，所以正文实际一直按 16px 渲染，页面上调 `.vp-doc` 毫无效果。已改为 `font-size: inherit`。
+- 同类的漏网规则还有一条：`.VPSidebarItem.level-3/4 .text { font-size: 0.79rem }` 压在上层规则之后，把侧栏四级条目的字号吃掉了。已删除，嵌套层统一 0.88rem。
+- 整体放大：正文 16→**17.3px**；版心 736→**768px**；节奏 0.4/0.75/1.15/1.8/2.8 → **0.45/0.85/1.25/2/3.2rem**；h1 上限 2.3→**2.5rem**；h2 1.4→**1.55rem**；首页 h1 上限 3→**3.3rem**；导航 0.84→**0.9rem**；侧栏 0.88→**0.92rem**；表格 0.9→**0.94rem**，单元格 padding 加宽；代码 0.85→**0.88rem**。
+- 产物验证：`.79rem` 与侧栏 `.82rem` 已从构建产物消失，`1.08rem` / `.92rem` / `.9rem` / `2.5rem` / `1.55rem` 均在。
+- `docs:build` exit 0（15.68s），49 页，CSS 134KB。
+- **仍未做视觉验收**：无浏览器渲染工具，「看上去够不够大气」只能由读者实际翻页判断。
