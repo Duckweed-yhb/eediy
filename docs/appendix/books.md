@@ -1,6 +1,6 @@
 # 电子书与经典教材
 
-跨板块的 EE 经典教材、免费电子书与参考书汇总。某板块专属教材仍登记在该板块 README 的「教材与参考书」分区，这里只做跨方向导航。
+按板块归类的书目视图：同一批教材在各板块 README 的「教材与参考书」里有更细的分章用途说明，本页只补出版社 / 作者官方页链接，方便按书找来源。**书目以板块页为准**——新增、改名或换版时改板块页，本页跟随同步，不要两处各写一份。
 
 > 条目格式：书名 · 作者 · 类型 · 链接 · 一句话说明 · 对应板块。链接优先出版社页 / 作者官网 / 官方免费电子书站，不写盗版 PDF。
 
@@ -45,7 +45,7 @@
 | 书名 | 作者 | 类型 | 链接 | 说明 | 对应板块 |
 |---|---|---|---|---|---|
 | 自动控制原理（第 7 版） | 胡寿松 | 教材 | [科学出版社](https://www.sciencep.com/) | 国内自动控制原理标准教材 | 04 电机与运动控制 |
-| Modern Control Engineering（5e） | Ogata | 教材 | [Pearson](https://www.pearson.com/) | 英文经典控制教材，配合 MIT 6.004 / 6.241 | 04 电机与运动控制 |
+| Modern Control Engineering（5e） | Ogata | 教材 | [Pearson](https://www.pearson.com/) | 英文经典控制教材，配合 MIT 6.241J 阅读（6.004 是数字系统课，不是控制课） | 04 电机与运动控制 |
 | 电机学 | 汤蕴璆 | 教材 | [机械工业出版社](https://www.cmpedu.com/) | 国内电机学常用教材 | 04 电机与运动控制 |
 | PMSM FOC 库开发者指南（中文 PDF） | STMicroelectronics | 电子书（免费官方） | [ST 官方 PDF](https://www.st.com/resource/zh/user_manual/cd00298482-advanced-developer-s-guide-for-stm32f-mcus-pmsm-single-dual-foc-library-stmicroelectronics.pdf) | ST 官方 FOC 库中文手册 | 04 电机与运动控制 |
 
@@ -54,7 +54,7 @@
 | 书名 | 作者 | 类型 | 链接 | 说明 | 对应板块 |
 |---|---|---|---|---|---|
 | 电力系统分析（上下） | 何仰赞、温增银 | 教材 | [华中科技大学出版社](http://press.hust.edu.cn/) | 国内电力系统分析经典教材 | 05 电力系统 |
-| Power System Dynamics and Stability | NPTEL 课程配套 | 参考书 | [NPTEL](https://nptel.ac.in/) | 印度理工公开课讲义，配合 NPTEL 课看 | 05 电力系统 |
+| Power System Dynamics and Stability | —（课程讲义，非单一教材） | 参考书 | [NPTEL](https://nptel.ac.in/) | 印度理工公开课的讲义与推荐阅读，具体书目以课程页为准 | 05 电力系统 |
 
 ## 数字逻辑与 FPGA
 
