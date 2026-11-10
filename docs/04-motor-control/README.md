@@ -67,7 +67,7 @@
 |---|---|---|---|
 | 课程官网 | MIT OCW · 6.241J Spring 2011 | https://www.ocw.mit.edu/courses/6-241j-dynamic-systems-and-control-spring-2011/ | 英文，含 syllabus、讲义、作业、考试归档 |
 | 视频录像 | 课程主页（本课程无公开录像，以讲义与作业为主） | https://www.ocw.mit.edu/courses/6-241j-dynamic-systems-and-control-spring-2011/ | English，配合讲义自学 |
-| 教材 | Feedback Systems: An Introduction for Scientists and Engineers，Karl Johan Åström & Richard M. Murray | https://www.cds.caltech.edu/~murray/amwiki/index.php/Main_Page | 作者开源免费 PDF |
+| 教材 | Feedback Systems: An Introduction for Scientists and Engineers，Karl Johan Åström & Richard M. Murray | https://fbswiki.org/wiki/index.php/Main_Page | 作者开源免费 PDF；2026-11-11 核验：原 Caltech 站点已 404，书站迁至 FBSwiki |
 | 作业 / 实验 | OCW assignments + MATLAB lab | https://www.ocw.mit.edu/courses/6-241j-dynamic-systems-and-control-spring-2011/pages/assignments/ | 含历年题与 solution |
 | 自学建议 | — | — | 与西工大自动控制原理并行对照学，英文术语与中文教材名词一一对应 |
 
@@ -163,7 +163,7 @@
 | 《现代控制理论》 | 刘豹、唐万生 主编 | 机械工业出版社 | 状态空间、能控能观、观测器 | 国内现代控制理论主流教材 |
 | 《电机学》（第三版） | 辜承林、陈乔夫、熊永前 | 华中科技大学出版社 | 变压器、直流、异步、同步（PMSM）电机 | 华科 MOOC 指定教材 |
 | 《电力电子技术》（第五版） | 王兆安、刘进军 | 机械工业出版社 | 三相逆变、SPWM、PWM 控制技术 | 国内电力电子标配教材 |
-| Feedback Systems: An Introduction for Scientists and Engineers | Karl Johan Åström, Richard M. Murray | Princeton University Press | 反馈建模、鲁棒性、PID | 作者官网开源免费 PDF：https://www.cds.caltech.edu/~murray/amwiki/ |
+| Feedback Systems: An Introduction for Scientists and Engineers | Karl Johan Åström, Richard M. Murray | Princeton University Press | 反馈建模、鲁棒性、PID | 作者开源的免费 PDF 在 FBSwiki：https://fbswiki.org/wiki/index.php/Main_Page （2026-11-11 核验） |
 | Modern Control Engineering | Katsuhiko Ogata | Pearson / Prentice Hall | 经典控制+状态空间英文参考 | MIT 2.14 指定教材 |
 | PMSM FOC 库开发者指南 | STMicroelectronics | ST UM（中文） | Clarke/Park、电流环、SVPWM、观测器 | 官方中文 PDF：https://www.st.com/resource/zh/user_manual/cd00298482-advanced-developer-s-guide-for-stm32f-mcus-pmsm-single-dual-foc-library-stmicroelectronics.pdf |
 
