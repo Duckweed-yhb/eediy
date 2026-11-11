@@ -1120,6 +1120,28 @@ html {
    720 双列组件转单列；480 手机竖屏
    ===================================================================== */
 
+/* 宽屏：内容区跟着视口放大。
+   VitePress 有侧栏时 .container 是 100% 宽，但正文的 .content-container 有上限，
+   不放开的话 1920 屏上正文只占约 40%，整页缩在中间显小气。
+   1440 给 56rem（约 52 字一行），1680 以上给 60rem（约 55 字），再宽就该分行排版了。 */
+@media (min-width: 1440px) {
+  .VPDoc .content-container {
+    max-width: 56rem !important;
+  }
+  .VPPage > div > div {
+    max-width: 56rem;
+  }
+}
+
+@media (min-width: 1680px) {
+  .VPDoc .content-container {
+    max-width: 60rem !important;
+  }
+  .VPPage > div > div {
+    max-width: 60rem;
+  }
+}
+
 /* 中等宽度：VitePress 在 1280 以下收起右侧目录，正文改用满宽版心即可 */
 @media (max-width: 1279px) {
   .VPDoc .content-container {
