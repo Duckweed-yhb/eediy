@@ -59,7 +59,7 @@
 
   --vp-sidebar-width: 16.5rem; /* 中文长标题在 15.5rem 内会折三行 */
   --vp-nav-height: 56px;
-  --vp-layout-max-width: 1520px;
+  --vp-layout-max-width: 1680px; /* 宽屏下整页不缩在中间 */
 
   --vp-button-brand-bg: var(--ee-ink);
   --vp-button-brand-border: var(--ee-ink);
@@ -261,7 +261,7 @@ html {
 
 .vp-doc {
   /* 用 rem 而非 px：读者调大浏览器默认字号时，正文跟着变大 */
-  font-size: 1.08rem;
+  font-size: 1.14rem;
   line-height: 1.85;
   letter-spacing: 0;
   color: var(--ee-ink);
@@ -303,7 +303,7 @@ html {
 }
 
 .vp-doc h1 {
-  font-size: clamp(1.85rem, 1.4rem + 1.6vw, 2.5rem);
+  font-size: clamp(1.95rem, 1.45rem + 1.7vw, 2.6rem);
   font-weight: 700;
   letter-spacing: 0;
   line-height: 1.3;
@@ -313,7 +313,7 @@ html {
 }
 
 .vp-doc h2 {
-  font-size: 1.55rem;
+  font-size: 1.62rem;
   font-weight: 650;
   letter-spacing: 0;
   line-height: 1.4;
@@ -327,7 +327,7 @@ html {
 }
 
 .vp-doc h3 {
-  font-size: 1.18rem;
+  font-size: 1.24rem;
   font-weight: 600;
   line-height: 1.5;
   margin: var(--ee-step-4) 0 var(--ee-step-1);
@@ -335,7 +335,7 @@ html {
 }
 
 .vp-doc h4 {
-  font-size: 1rem;
+  font-size: 1.04rem;
   font-weight: 600;
   line-height: 1.5;
   margin: var(--ee-step-3) 0 var(--ee-step-1);
@@ -951,7 +951,7 @@ html {
   max-width: var(--ee-measure-home);
   margin: 0 auto;
   padding: 4rem 1.5rem 5.5rem;
-  font-size: 1.08rem;
+  font-size: 1.14rem;
   line-height: 1.8;
   color: var(--ee-ink);
 }
@@ -961,7 +961,7 @@ html {
   max-width: 20em;
   margin: 0;
   padding: 0;
-  font-size: clamp(2.1rem, 1.5rem + 2.8vw, 3.3rem);
+  font-size: clamp(2.2rem, 1.55rem + 3vw, 3.5rem);
   font-weight: 700;
   letter-spacing: 0;
   line-height: 1.28;
@@ -1123,22 +1123,23 @@ html {
 /* 宽屏：内容区跟着视口放大。
    VitePress 有侧栏时 .container 是 100% 宽，但正文的 .content-container 有上限，
    不放开的话 1920 屏上正文只占约 40%，整页缩在中间显小气。
-   1440 给 56rem（约 52 字一行），1680 以上给 60rem（约 55 字），再宽就该分行排版了。 */
+   字号同步提到 1.14rem（18.2px），这样 1440 的 60rem 与 1680 的 64rem
+   分别落在 53 字与 56 字一行，不会被拉成 60 多字的长行。 */
 @media (min-width: 1440px) {
-  .VPDoc .content-container {
-    max-width: 56rem !important;
-  }
-  .VPPage > div > div {
-    max-width: 56rem;
-  }
-}
-
-@media (min-width: 1680px) {
   .VPDoc .content-container {
     max-width: 60rem !important;
   }
   .VPPage > div > div {
     max-width: 60rem;
+  }
+}
+
+@media (min-width: 1680px) {
+  .VPDoc .content-container {
+    max-width: 64rem !important;
+  }
+  .VPPage > div > div {
+    max-width: 64rem;
   }
 }
 

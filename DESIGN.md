@@ -52,13 +52,14 @@
 | `--ee-measure-home` | `48rem`（首页与正文同版心） |
 | `--ee-scroll-offset` | `calc(导航 56px + 1rem)`（锚点跳转的顶部留白） |
 | 节奏 | `--ee-step-1..5` = 0.45 / 0.85 / 1.25 / 2 / 3.2rem |
-| 正文 | `1.08rem`（≈17.3px）/ line-height 1.85 / letter-spacing 0 |
-| 文档 h1 | `clamp(1.85rem, 1.4rem + 1.6vw, 2.5rem)`，700，行高 1.3 |
-| 首页 h1 | `clamp(2.1rem, 1.5rem + 2.8vw, 3.3rem)`，700，行高 1.28，`max-width: 20em`，`text-wrap: balance` |
-| h2 | 1.55rem / 650，行高 1.4，**上方 3.2rem、下方 0.85rem**，带 `border-top: 1px rule` |
-| h3 / h4 | 1.18rem / 1rem，600，行高 1.5 |
+| 正文 | `1.14rem`（≈18.2px）/ line-height 1.85 / letter-spacing 0 |
+| 文档 h1 | `clamp(1.95rem, 1.45rem + 1.7vw, 2.6rem)`，700，行高 1.3 |
+| 首页 h1 | `clamp(2.2rem, 1.55rem + 3vw, 3.5rem)`，700，行高 1.28，`max-width: 20em`，`text-wrap: balance` |
+| h2 | 1.62rem / 650，行高 1.4，**上方 3.2rem、下方 0.85rem**，带 `border-top: 1px rule` |
+| h3 / h4 | 1.24rem / 1.04rem，600，行高 1.5 |
+| 宽屏版心 | ≥1440px 用 60rem（≈53 字/行），≥1680px 用 64rem（≈56 字/行） |
 | 侧栏 | 组标题 0.76rem / 0.06em；条目 0.92rem；嵌套 0.88rem |
-| 外壳 | `--vp-sidebar-width 16.5rem`、`--vp-nav-height 56px`、`--vp-layout-max-width 1520px` |
+| 外壳 | `--vp-sidebar-width 16.5rem`、`--vp-nav-height 56px`、`--vp-layout-max-width 1680px` |
 | 字号单位 | 正文用 `rem`，跟随读者浏览器字号；不引入自有字体文件 |
 
 动效
