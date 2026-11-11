@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 
 const THEMES = [
   { id: 'paper', label: '工程讲义', hint: '纸面 · 章节索引' },
@@ -33,6 +33,24 @@ function apply(id) {
   } catch (e) {
     /* 隐私模式下 localStorage 不可写，忽略即可 */
   }
+}
+
+async function toggleThemes() {
+  open.value = !open.value
+  if (open.value) {
+    await nextTick()
+    root.value?.querySelector('.theme-option[data-active="true"]')?.focus()
+  }
+}
+
+function navigateThemes(event) {
+  if (!['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) return
+  event.preventDefault()
+  const items = [...root.value.querySelectorAll('.theme-option')]
+  const index = items.indexOf(document.activeElement)
+  const target = event.key === 'Home' ? 0 : event.key === 'End' ? items.length - 1
+    : (index + (event.key === 'ArrowDown' ? 1 : -1) + items.length) % items.length
+  items[target]?.focus()
 }
 
 function onDocumentClick(event) {
@@ -72,13 +90,13 @@ onBeforeUnmount(() => {
       aria-haspopup="true"
       :aria-expanded="open"
       aria-label="切换视觉主题"
-      @click="open = !open"
+      @click="toggleThemes"
     >
       <span class="theme-swatch" :data-theme-id="current" aria-hidden="true" />
       <span class="theme-trigger__text">{{ currentLabel }}</span>
     </button>
 
-    <ul v-if="open" class="theme-menu" aria-label="视觉主题">
+    <ul v-if="open" class="theme-menu" aria-label="视觉主题" @keydown="navigateThemes">
       <li v-for="t in THEMES" :key="t.id" role="none">
         <button
           type="button"
