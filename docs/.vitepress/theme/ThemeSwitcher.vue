@@ -2,10 +2,15 @@
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
 
 const THEMES = [
-  { id: 'paper', label: '讲义', hint: '纸面 · 铜色' },
-  { id: 'cyber', label: '赛博', hint: '暗底 · 霓虹青' },
-  { id: 'romance', label: '浪漫', hint: '暖白 · 玫瑰' },
-  { id: 'ink', label: '墨', hint: '灰度 · 专注' }
+  { id: 'paper', label: '工程讲义', hint: '纸面 · 章节索引' },
+  { id: 'pixel', label: '像素工坊', hint: '阶梯边框 · 点阵 · 游戏菜单' },
+  { id: 'cyber', label: '赛博朋克', hint: '切角面板 · 霓虹 · 控制台' },
+  { id: 'blueprint', label: '工程蓝图', hint: '制图网格 · 标注 · 图纸编号' },
+  { id: 'terminal', label: '终端工作站', hint: '等宽界面 · 命令提示 · 虚线' },
+  { id: 'bauhaus', label: '包豪斯', hint: '几何构成 · 非对称 · 大序号' },
+  { id: 'brutal', label: '新粗野主义', hint: '粗线 · 硬阴影 · 强对比' },
+  { id: 'romance', label: '学术出版', hint: '衬线 · 窄版心 · 章节留白' },
+  { id: 'ink', label: '极简黑白', hint: '灰度 · 紧凑 · 信息优先' }
 ]
 
 const current = ref('paper')
@@ -19,6 +24,7 @@ const currentLabel = computed(
 function apply(id) {
   current.value = id
   open.value = false
+  root.value?.querySelector('.theme-trigger')?.focus()
   if (typeof document !== 'undefined') {
     document.documentElement.dataset.theme = id
   }
@@ -63,22 +69,22 @@ onBeforeUnmount(() => {
     <button
       class="theme-trigger"
       type="button"
-      aria-haspopup="listbox"
+      aria-haspopup="true"
       :aria-expanded="open"
-      aria-label="切换配色主题"
+      aria-label="切换视觉主题"
       @click="open = !open"
     >
       <span class="theme-swatch" :data-theme-id="current" aria-hidden="true" />
       <span class="theme-trigger__text">{{ currentLabel }}</span>
     </button>
 
-    <ul v-if="open" class="theme-menu" role="listbox" aria-label="配色主题">
+    <ul v-if="open" class="theme-menu" aria-label="视觉主题">
       <li v-for="t in THEMES" :key="t.id" role="none">
         <button
           type="button"
-          role="option"
+
           class="theme-option"
-          :aria-selected="t.id === current"
+          :aria-pressed="t.id === current"
           :data-active="t.id === current"
           @click="apply(t.id)"
         >

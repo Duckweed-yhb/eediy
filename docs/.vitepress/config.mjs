@@ -23,7 +23,7 @@ export default defineConfig({
       [
         'script',
         {},
-        "try{var t=localStorage.getItem('eediy-theme');document.documentElement.dataset.theme=['cyber','romance','ink'].indexOf(t)>-1?t:'paper'}catch(e){document.documentElement.dataset.theme='paper'}"
+        "try{var t=localStorage.getItem('eediy-theme');document.documentElement.dataset.theme=['cyber','romance','ink','pixel','blueprint','terminal','bauhaus','brutal'].indexOf(t)>-1?t:'paper'}catch(e){document.documentElement.dataset.theme='paper'}"
       ]
     ]
   },
