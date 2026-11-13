@@ -7,7 +7,7 @@ EE（电气电子工程）自学路线与笔记归档。参照 csdiy.wiki 的组
 ## 目录结构
 
 ```text
-eediy_wiki/
+eediy/
 ├── docs/                          VitePress 站点根目录
 │   ├── index.md                  站点首页（论点标题 + 板块索引）
 │   ├── guide.md                  如何使用本站（三类读者、判断基础、选课原则、时间安排）
@@ -93,9 +93,9 @@ npm run docs:preview   # 本地预览构建产物
 
 1. 仓库 **Settings → Pages → Build and deployment → Source** 选择 **GitHub Actions**（只需设置一次）。
 2. 工作流见 [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)：推送到 `main` 后自动安装依赖、构建并发布。
-3. 构建产物地址：<https://duckweed-yhb.github.io/eediy_wiki/>
+3. 构建产物地址：<https://duckweed-yhb.github.io/eediy/>
 
-`config.mjs` 中 `base` 设为 `/eediy_wiki/`，与仓库名子路径对应；若以后改为根域名部署，再把 `base` 改成 `/`。新增配图、PDF 一律放进 `docs/public/assets/`，Markdown 里用 `/assets/...` 根路径引用。
+`config.mjs` 中 `base` 设为 `/eediy/`，与仓库名子路径对应；若以后改为根域名部署，再把 `base` 改成 `/`。新增配图、PDF 一律放进 `docs/public/assets/`，Markdown 里用 `/assets/...` 根路径引用。
 
 ## 新增内容约定
 

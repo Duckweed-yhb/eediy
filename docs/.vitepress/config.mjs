@@ -7,15 +7,15 @@ import { defineConfig } from 'vitepress'
 import { mermaidMarkdown, mermaidPlugin } from 'vitepress-plugin-mermaid-viewer'
 
 export default defineConfig({
-  // 站点根路径：按 GitHub Pages 子路径 /eediy_wiki/ 占位；若改为根路径部署则置 '/'
-  base: '/eediy_wiki/',
+  // 站点根路径：按 GitHub Pages 子路径 /eediy/ 占位；若改为根路径部署则置 '/'
+  base: '/eediy/',
   title: 'EE自学指南',
   description: 'EE（电气电子工程）自学路线与笔记归档',
   lang: 'zh-CN',
   // 生成 sitemap。hostname 要带 Pages 子路径，而且**必须以 / 结尾**：
   // 生成器用 new URL(page, hostname)，结尾没有斜杠时最后一段会被当成文件名替换掉。
   sitemap: {
-    hostname: 'https://duckweed-yhb.github.io/eediy_wiki/'
+    hostname: 'https://duckweed-yhb.github.io/eediy/'
   },
   // 首屏就套上读者上次选的配色，避免先闪一下默认色
   transformHead() {
@@ -174,7 +174,7 @@ export default defineConfig({
       }
     ],
     outline: { level: [2, 3] },
-    socialLinks: [{ icon: 'github', link: 'https://github.com/Duckweed-yhb/eediy_wiki' }],
+    socialLinks: [{ icon: 'github', link: 'https://github.com/Duckweed-yhb/eediy' }],
     // 站内搜索：默认分词按空格切，中文句子会被当成一个整词，搜「指针」搜不出来。
     // 这里改成中文按二元组切（相邻两字一个 token），英文与数字整体保留。
     search: {
