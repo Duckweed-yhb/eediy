@@ -36,6 +36,6 @@ description: 电气电子工程自学课程索引：八个内容板块，按课�
 
 - <span class="idx-no">08</span> **[硬件工具链](/08-hardware-toolchain/README)** <span class="idx-gist">PCB 设计、电路仿真、测量调试、版本管理与文档工具。支持设计验证、故障定位与工程协作。</span>
 
-- <span class="idx-no">—</span> **[同校指南 · 哈工大（深圳）电气](/campus/hitsz-ee/)** <span class="idx-gist">面向本校电气工程及其自动化专业学生：课内按 12 个学期逐页拆开，课外分竞赛、项目、实习三条线。</span>
+- <span class="idx-no">—</span> **[同校指南 · 哈工大（深圳）电气](https://duckweed-yhb.github.io/campus/hitsz-ee/)** <span class="idx-gist">面向本校电气工程及其自动化专业学生：课内按 12 个学期逐页拆开，课外分竞赛、项目、实习三条线。</span>
 
 相关索引：[附录：书 / 课 / 工具](/appendix/README) · [前言：为什么做这个站](/preface) · [全部笔记索引](/README)
