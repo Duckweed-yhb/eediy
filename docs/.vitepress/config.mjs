@@ -38,37 +38,18 @@ export default defineConfig({
   themeConfig: {
     // 一级入口压到 6 个：其余收进侧栏，避免中等宽度顶栏拥挤
     nav: [
-      { text: '怎么用', link: '/guide' },
-      { text: '课程体系', link: '/curriculum' },
-      { text: '方向分流', link: '/directions' },
-      { text: '路线地图', link: '/roadmap' },
+      { text: '板块索引', link: '/README' },
       { text: '同校指南', link: '/campus/hitsz-ee/' },
       { text: '附录', link: '/appendix/README' }
     ],
-    // 侧栏按读者任务分三段：先开始，再体系，最后查阅
+    // 侧栏只留查阅任务：先读前言，再按板块找内容
     sidebar: [
       {
         text: '开始阅读',
         items: [
           { text: '前言 · 为什么做这个站', link: '/preface' },
-          { text: '如何使用本站', link: '/guide' },
-          { text: '一条贯通路线', link: '/start' }
-        ]
-      },
-      {
-        text: '学习路径',
-        items: [
-          { text: '课程体系（四层结构）', link: '/curriculum' },
-          { text: '共同基础', link: '/foundation' },
-          { text: '方向分流（五条线）', link: '/directions' },
-          { text: '嵌入式方向路线', link: '/directions/embedded' }
-        ]
-      },
-      {
-        text: '查阅',
-        items: [
-          { text: '路线地图', link: '/roadmap' },
-          { text: '板块索引', link: '/README' },
+          { text: '共同基础（先修缺口）', link: '/foundation' },
+          { text: '板块索引（八个板块）', link: '/README' },
           { text: '附录总览', link: '/appendix/README' }
         ]
       },

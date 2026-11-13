@@ -52,7 +52,7 @@ tags: [C 语言, 入门编程, 共同基础]
 | 习题 | Problem Set 1–5 | Week 1–5 各一题，`check50` 自动评测 |
 | 实验 | CS50 的 Lab（部分周） | 以命令行程序为主，不需要硬件 |
 
-**与你这条线的关系**：这门课只练「PC 上的 C」，不碰 MCU。做完之后你会写程序，但还不会控制硬件——那是 [嵌入式路线](/directions/embedded) S3 的事。
+**与你这条线的关系**：这门课只练「PC 上的 C」，不碰 MCU。做完之后你会写程序，但还不会控制硬件——控制硬件从 [03 板块](/03-embedded-mcu/README) 的 GPIO 与外设驱动开始。
 
 ## 语言、访问条件、工具
 
@@ -81,8 +81,8 @@ tags: [C 语言, 入门编程, 共同基础]
 
 ## 后续去哪
 
-- 下一阶段：[嵌入式路线 S1 → S2](/directions/embedded)（C 收口之后进电路与数字逻辑）
-- 服务的方向：[嵌入式与硬件系统](/directions/embedded)
+- 下一阶段：进 [02 电路与电子学](/02-circuit-electronics/README)，同时用 [03 板块](/03-embedded-mcu/README) 的第一门课把程序烧进硬件
+- 服务的板块：[03 嵌入式与单片机](/03-embedded-mcu/README)
 - 对应板块：[01 数理与编程基础](/01-math-programming/README)
 - 相关课程页：[电路原理](/courses/circuit-xjtu) · [浙大 STM32](/courses/stm32-zju)
 

@@ -2,23 +2,17 @@
 
 > 代号 EEDIY（EE + DIY），对标 csdiy.wiki 的「CS自学指南」。
 
-EE（电气电子工程）自学路线与笔记归档。参照 csdiy.wiki 的组织方式，把课程、教材、习题、项目和自己的笔记按成长路线分板块整理；站点基于 VitePress，内容全部以 Markdown 维护。
+EE（电气电子工程）自学**课程索引**：按知识块把公开课、教材、习题、工具与自己的笔记列清楚——谁开的、讲什么、资源在哪、学完接哪门。具体的学习路线与阶段安排写在[个人博客](https://duckweed-yhb.github.io)，本站不重复。站点基于 VitePress，内容全部以 Markdown 维护。
 
 ## 目录结构
 
 ```text
 eediy/
 ├── docs/                          VitePress 站点根目录
-│   ├── index.md                  站点首页（论点标题 + 板块索引）
-│   ├── guide.md                  如何使用本站（三类读者、判断基础、选课原则、时间安排）
-│   ├── curriculum.md             课程体系（四层结构、共同基础、覆盖检查、参考项目对照）
+│   ├── index.md                  站点首页（板块索引）
 │   ├── foundation.md             共同基础（必须 vs 边做边补、测量与实验方法）
-│   ├── directions.md             方向分流（五条线的课程链、第一个项目、缺口优先级）
-│   ├── directions/embedded.md    嵌入式与硬件系统：S0–S6 完整路线
 │   ├── courses/                  课程页（CS50x C 部分 / 西交电路 / 浙大 STM32）
-│   ├── start.md                  一条贯通路线（C 语言 → 电路 → MCU → 可验收项目）
-│   ├── README.md                 EE 自学路线总览（板块关系与推荐顺序）
-│   ├── roadmap.md                路线地图（课程前置依赖图 + 硬件→软件分层架构图）
+│   ├── README.md                 板块索引（板块关系与八个板块清单）
 │   ├── appendix/                 附录：电子书、公开课、资源网站、工具清单
 │   │   ├── README.md
 │   │   ├── books.md
@@ -52,17 +46,14 @@ eediy/
 └── LICENSE                        MIT License
 ```
 
-## 路线总览
+## 站点结构
 
-- 不知道从哪开始：[如何使用本站](docs/guide.md) —— 三类读者（零基础探索 / 在校补课 / 进方向）、基础自检、选一门主课的原则、时间安排示例。
-- 整体结构：[课程体系](docs/curriculum.md) —— 四层结构（入门体验 / 共同基础 / 方向分流 / 综合实践）、EE 核心知识块覆盖检查、参考项目对照。
+- 建站动机与范围：[前言](docs/preface.md) —— 这个站收什么、不收什么。
+- 板块索引：[docs/README.md](docs/README.md) —— 八个板块、板块之间相邻关系、填写约定。
 - 共同基础：[docs/foundation.md](docs/foundation.md) —— 哪些必须先有、哪些可以边做边补、测量与实验的四步方法。
-- 方向选择：[方向分流](docs/directions.md) —— 五条线的课程链、第一个项目、缺口与优先级；其中 [嵌入式](docs/directions/embedded.md) 是完整示范路线（S0–S6）。
-- 课程页：[docs/courses/](docs/courses/) —— 每门核心课的先修、主推荐理由、替代资源、投入（官方与编辑估计分开）、完成标准、核验日期。
-- 最短路径：[一条贯通路线](docs/start.md) —— C 语言 → 电路与数字逻辑 → MCU 外设 → 一个可验收的小项目。
-- 图形化全局关系：[docs/roadmap.md](docs/roadmap.md) —— 课程前置依赖图与硬件→软件分层架构图。
-- 板块关系、前置依赖与推荐学习顺序：[docs/README.md](docs/README.md)。
+- 课程页：[docs/courses/](docs/courses/) —— 基本信息、课程内容、资源、教材、前置与下一步。
 - 跨板块资源汇总（电子书、公开课、网站、工具）：[docs/appendix/README.md](docs/appendix/README.md)。
+- 学习顺序、阶段安排与取舍理由：不在本站，写在[个人博客](https://duckweed-yhb.github.io)；博客更新后本站只保留外链入口。
 
 | 板块 | 页面 | 一句话定位 |
 |---|---|---|

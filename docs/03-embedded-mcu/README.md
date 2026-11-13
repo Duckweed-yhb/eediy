@@ -7,7 +7,6 @@
 - **前置**：[01 数理与编程基础](../01-math-programming/README.md)（C 语言）、[02 电路与电子学](../02-circuit-electronics/README.md)。
 - **通往**：[04 电机与运动控制](../04-motor-control/README.md)、[07 数字逻辑与 FPGA](../07-digital-fpga/README.md)。
 - **学习顺序建议**：先把一颗 MCU 的外设手册读通，再上 RTOS；驱动写法与电路配合着学。
-- **方向路线**：[嵌入式与硬件系统（S0–S6 完整路线）](/directions/embedded) —— 从工具测量到 48 小时项目验收。
 - **课程页**：[浙江大学 · STM32 嵌入式系统](/courses/stm32-zju) —— 主推荐与替代（电科大 HAL 课）的差异、完成标准、无板降级方案。
 
 ## 核心公开课与课程

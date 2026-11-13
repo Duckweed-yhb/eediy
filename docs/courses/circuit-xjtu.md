@@ -107,7 +107,7 @@ tags: [电路原理, 共同基础, 必学]
 ## 后续去哪
 
 - 下一门课：模拟电子技术、数字电子技术（[02 板块](/02-circuit-electronics/README)）
-- 服务的方向：[嵌入式与硬件系统](/directions/embedded)、[电机驱动与控制](/directions)、[电力系统与能源](/directions)
+- 服务的板块：[03 嵌入式与单片机](/03-embedded-mcu/README)、[04 电机与运动控制](/04-motor-control/README)、[05 电力系统](/05-power-system/README)
 - 对应板块：[02 电路与电子学](/02-circuit-electronics/README)
 
 ## 变更记录
